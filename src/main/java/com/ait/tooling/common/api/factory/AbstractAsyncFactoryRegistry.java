@@ -1,0 +1,131 @@
+/*
+   Copyright (c) 2014,2015 Ahome' Innovation Technologies. All rights reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+   
+   Author: Dean S. Jones
+ */
+
+package com.ait.tooling.common.api.factory;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Objects;
+
+import com.ait.tooling.common.api.java.util.StringOps;
+
+public abstract class AbstractAsyncFactoryRegistry<T, A> implements IAsyncFactoryRegistry<T, A>
+{
+    private final LinkedHashMap<String, IAsyncFactory<T, A>> m_factories = new LinkedHashMap<String, IAsyncFactory<T, A>>();
+
+    protected AbstractAsyncFactoryRegistry()
+    {
+    }
+
+    @Override
+    public boolean isDefined(final String name)
+    {
+        return (null != get(name));
+    }
+
+    @Override
+    public Collection<String> keys()
+    {
+        return Collections.unmodifiableSet(m_factories.keySet());
+    }
+
+    @Override
+    public Collection<IAsyncFactory<T, A>> values()
+    {
+        return Collections.unmodifiableCollection(m_factories.values());
+    }
+
+    @Override
+    public IAsyncFactory<T, A> get(final String name)
+    {
+        return m_factories.get(StringOps.requireTrimOrNull(name));
+    }
+
+    @Override
+    public IAsyncFactory<T, A> put(String name, final IAsyncFactory<T, A> factory)
+    {
+        name = StringOps.requireTrimOrNull(name);
+
+        final IAsyncFactory<T, A> last = m_factories.put(name, factory);
+
+        if (null == factory)
+        {
+            m_factories.remove(name);
+        }
+        return last;
+    }
+
+    @Override
+    public IAsyncFactory<T, A> remove(final String name)
+    {
+        return m_factories.remove(StringOps.requireTrimOrNull(name));
+    }
+
+    @Override
+    public void create(final String type, final A args, final IAsyncFactoryResult<T> callback)
+    {
+        Objects.requireNonNull(callback);
+
+        final String name = StringOps.requireTrimOrNull(type);
+
+        try
+        {
+            final IAsyncFactory<T, A> factory = get(name);
+
+            if (null == factory)
+            {
+                getDefault(name, args, new IAsyncFactoryResult<T>()
+                {
+                    @Override
+                    public void onFailure(final Throwable caught)
+                    {
+                        callback.onFailure(caught);
+                    }
+
+                    @Override
+                    public void accept(final T result)
+                    {
+                        if (null == result)
+                        {
+                            callback.onFailure(new UndefinedFactoryException(name));
+                        }
+                        else
+                        {
+                            callback.accept(result);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                factory.create(name, args, callback);
+            }
+        }
+        catch (Exception caught)
+        {
+            callback.onFailure(caught);
+        }
+    }
+
+    @Override
+    public void getDefault(final String name, final A args, final IAsyncFactoryResult<T> callback)
+    {
+        callback.onFailure(new UndefinedFactoryException(name));
+    }
+}
