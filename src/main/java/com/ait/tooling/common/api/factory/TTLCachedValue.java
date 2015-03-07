@@ -16,22 +16,35 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.factory;
 
 import java.util.Objects;
 
-public abstract class AbstractModelRepresentation<T> implements IModel<T>
-{
-    private final T m_model;
+import com.ait.tooling.common.api.types.ITimeStamped;
+import com.ait.tooling.common.api.types.IValued;
 
-    protected AbstractModelRepresentation(T model)
+public final class TTLCachedValue<T> implements IValued<T>, ITimeStamped
+{
+    private final T    m_value;
+
+    private final long m_stamp;
+
+    public TTLCachedValue(final T value, final long timestamp)
     {
-        m_model = Objects.requireNonNull(model);
+        m_value = Objects.requireNonNull(value);
+
+        m_stamp = Math.max(timestamp, 0);
     }
 
     @Override
-    public T getModel()
+    public final T getValue()
     {
-        return m_model;
+        return m_value;
+    }
+
+    @Override
+    public final long getTimeStamp()
+    {
+        return m_stamp;
     }
 }

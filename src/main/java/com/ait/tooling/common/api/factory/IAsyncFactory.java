@@ -18,7 +18,7 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface IAsyncFactory<T, A>
+public interface IAsyncFactory<T, A, C extends IFactoryContext>
 {
-    public void create(String name, A args, IAsyncFactoryResult<T> callback);
+    public void create(String name, A args, C context, IAsyncFactoryResult<T> callback);
 }

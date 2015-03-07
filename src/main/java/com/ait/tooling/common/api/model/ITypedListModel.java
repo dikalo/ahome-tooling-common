@@ -20,6 +20,6 @@ package com.ait.tooling.common.api.model;
 
 import com.ait.tooling.common.api.types.ITypedList;
 
-public interface ITypedListModel<R, T> extends IModelRepresentation<R>, ITypedList<T>
+public interface ITypedListModel<R, T> extends IModel<R>, ITypedList<T>
 {
 }

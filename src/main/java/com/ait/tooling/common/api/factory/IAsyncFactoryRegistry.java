@@ -18,21 +18,9 @@
 
 package com.ait.tooling.common.api.factory;
 
-import java.util.Collection;
+import com.ait.tooling.common.api.types.ITypedDictionary;
 
-public interface IAsyncFactoryRegistry<T, A> extends IAsyncFactory<T, A>
+public interface IAsyncFactoryRegistry<T, A, C extends IFactoryContext> extends IAsyncFactory<T, A, C>, ITypedDictionary<IAsyncFactory<T, A, C>>
 {
-    public boolean isDefined(String name);
-
-    public Collection<String> keys();
-
-    public Collection<IAsyncFactory<T, A>> values();
-
-    public IAsyncFactory<T, A> get(String name);
-
-    public IAsyncFactory<T, A> put(String name, IAsyncFactory<T, A> factory);
-
-    public IAsyncFactory<T, A> remove(String name);
-
-    public void getDefault(String name, A args, IAsyncFactoryResult<T> callback);
+    public boolean isModifiable();
 }

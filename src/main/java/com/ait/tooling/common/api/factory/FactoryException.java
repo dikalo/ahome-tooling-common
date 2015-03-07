@@ -16,22 +16,23 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.factory;
 
-import java.util.Objects;
-
-public abstract class AbstractModelRepresentation<T> implements IModel<T>
+@SuppressWarnings("serial")
+public class FactoryException extends Exception
 {
-    private final T m_model;
-
-    protected AbstractModelRepresentation(T model)
+    public FactoryException(final String message)
     {
-        m_model = Objects.requireNonNull(model);
+        super(message);
     }
 
-    @Override
-    public T getModel()
+    public FactoryException(final Throwable cause)
     {
-        return m_model;
+        super(cause);
+    }
+
+    public FactoryException(final String message, final Throwable cause)
+    {
+        super(message, cause);
     }
 }

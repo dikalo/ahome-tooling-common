@@ -16,22 +16,25 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.factory;
 
-import java.util.Objects;
-
-public abstract class AbstractModelRepresentation<T> implements IModel<T>
+public interface ICachedFactory<T, A, C extends IFactoryContext> extends IFactory<T, A, C>
 {
-    private final T m_model;
+    public void clear();
 
-    protected AbstractModelRepresentation(T model)
-    {
-        m_model = Objects.requireNonNull(model);
-    }
+    public void clear(String name);
 
-    @Override
-    public T getModel()
-    {
-        return m_model;
-    }
+    public void clearExpired();
+
+    public void clearExpired(String name);
+
+    public void setGlobalTTL(long millis);
+
+    public void setByTypeTTL(String name, long millis);
+
+    public void clearGlobalTTL();
+
+    public void clearByTypeTTL();
+
+    public void clearByTypeTTL(String name);
 }

@@ -16,9 +16,11 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.factory;
 
-public interface IModelRepresentation<T>
+import com.ait.tooling.common.api.types.ITypedDictionary;
+
+public interface IFactoryRegistry<T, A, C extends IFactoryContext> extends IFactory<T, A, C>, ITypedDictionary<IFactory<T, A, C>>
 {
-    public T getModelRepresentation();
+    public boolean isModifiable();
 }

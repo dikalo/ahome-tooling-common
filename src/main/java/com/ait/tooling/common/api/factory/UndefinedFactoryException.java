@@ -19,10 +19,10 @@
 package com.ait.tooling.common.api.factory;
 
 @SuppressWarnings("serial")
-public class UndefinedFactoryException extends Exception
+public final class UndefinedFactoryException extends FactoryException
 {
-    public UndefinedFactoryException(String message)
+    public UndefinedFactoryException(final String type)
     {
-        super(message);
+        super("Undefined Factory type: " + type);
     }
 }

@@ -16,22 +16,19 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.types;
 
-import java.util.Objects;
+import java.util.Collection;
 
-public abstract class AbstractModelRepresentation<T> implements IModel<T>
+public interface IDictionary
 {
-    private final T m_model;
+    public int size();
 
-    protected AbstractModelRepresentation(T model)
-    {
-        m_model = Objects.requireNonNull(model);
-    }
+    public boolean isEmpty();
 
-    @Override
-    public T getModel()
-    {
-        return m_model;
-    }
+    public boolean isDefined(String name);
+
+    public boolean isNull(String name);
+
+    public Collection<String> keys();
 }

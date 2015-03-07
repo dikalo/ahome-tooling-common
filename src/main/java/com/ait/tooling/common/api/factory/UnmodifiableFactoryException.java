@@ -16,9 +16,13 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.json;
+package com.ait.tooling.common.api.factory;
 
-public interface IJSONSerializable
+@SuppressWarnings("serial")
+public final class UnmodifiableFactoryException extends RuntimeException
 {
-    public String toJSONString();
+    public UnmodifiableFactoryException(final String type)
+    {
+        super("Factory is unmodifiable for type: " + type);
+    }
 }

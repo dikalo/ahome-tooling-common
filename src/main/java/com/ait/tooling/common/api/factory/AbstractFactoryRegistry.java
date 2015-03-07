@@ -25,18 +25,18 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryContext> implements IAsyncFactoryRegistry<T, A, C>
+public abstract class AbstractFactoryRegistry<T, A, C extends IFactoryContext> implements IFactoryRegistry<T, A, C>
 {
-    private boolean                                             m_canmodify;
+    private boolean                                        m_canmodify;
 
-    private final LinkedHashMap<String, IAsyncFactory<T, A, C>> m_factories = new LinkedHashMap<String, IAsyncFactory<T, A, C>>();
+    private final LinkedHashMap<String, IFactory<T, A, C>> m_factories = new LinkedHashMap<String, IFactory<T, A, C>>();
 
-    protected AbstractAsyncFactoryRegistry()
+    protected AbstractFactoryRegistry()
     {
         this(false);
     }
 
-    protected AbstractAsyncFactoryRegistry(final boolean canmodify)
+    protected AbstractFactoryRegistry(final boolean canmodify)
     {
         setModifiable(canmodify);
     }
@@ -83,16 +83,16 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
     }
 
     @Override
-    public IAsyncFactory<T, A, C> get(final String name)
+    public IFactory<T, A, C> get(final String name)
     {
         return m_factories.get(StringOps.requireTrimOrNull(name));
     }
 
-    protected void putFactory(String name, final IAsyncFactory<T, A, C> factory)
+    protected void putFactory(String name, final IFactory<T, A, C> factory)
     {
         name = StringOps.requireTrimOrNull(name);
 
-        final IAsyncFactory<T, A, C> last = get(name);
+        final IFactory<T, A, C> last = get(name);
 
         if (isModifiable())
         {
@@ -133,53 +133,24 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
     }
 
     @Override
-    public void create(final String type, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    public T create(final String type, final A args, final C context) throws FactoryException
     {
-        Objects.requireNonNull(callback);
-
         final String name = StringOps.requireTrimOrNull(type);
 
-        try
+        final IFactory<T, A, C> factory = get(name);
+
+        if (null == factory)
         {
-            final IAsyncFactory<T, A, C> factory = get(name);
-
-            if (null == factory)
-            {
-                getDefault(name, args, context, new IAsyncFactoryResult<T>()
-                {
-                    @Override
-                    public void onFailure(final Throwable caught)
-                    {
-                        callback.onFailure(caught);
-                    }
-
-                    @Override
-                    public void accept(final T result)
-                    {
-                        if (null == result)
-                        {
-                            callback.onFailure(new UndefinedFactoryException(name));
-                        }
-                        else
-                        {
-                            callback.accept(result);
-                        }
-                    }
-                });
-            }
-            else
-            {
-                factory.create(name, args, context, callback);
-            }
+            return getDefault(name, args, context);
         }
-        catch (Exception caught)
+        else
         {
-            callback.onFailure(caught);
+            return factory.create(name, args, context);
         }
     }
 
-    protected void getDefault(final String name, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    protected T getDefault(final String name, final A args, final C context) throws FactoryException
     {
-        callback.onFailure(new UndefinedFactoryException(name));
+        throw new UndefinedFactoryException(name);
     }
 }

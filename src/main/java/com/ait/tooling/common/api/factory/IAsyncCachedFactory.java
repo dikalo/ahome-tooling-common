@@ -18,7 +18,7 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface IAsyncCachedFactory<T, A> extends IAsyncFactory<T, A>
+public interface IAsyncCachedFactory<T, A, C extends IFactoryContext> extends IAsyncFactory<T, A, C>
 {
     public void clear();
 

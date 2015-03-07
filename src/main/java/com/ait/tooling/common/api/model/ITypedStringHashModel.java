@@ -20,6 +20,6 @@ package com.ait.tooling.common.api.model;
 
 import com.ait.tooling.common.api.types.ITypedStringHash;
 
-public interface ITypedStringHashModel<R, T> extends IModelRepresentation<R>, ITypedStringHash<T>
+public interface ITypedStringHashModel<R, T> extends IModel<R>, ITypedStringHash<T>
 {
 }

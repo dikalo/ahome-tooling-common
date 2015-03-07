@@ -16,22 +16,8 @@
    Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.factory;
 
-import java.util.Objects;
-
-public abstract class AbstractModelRepresentation<T> implements IModel<T>
+public interface IFactoryContext
 {
-    private final T m_model;
-
-    protected AbstractModelRepresentation(T model)
-    {
-        m_model = Objects.requireNonNull(model);
-    }
-
-    @Override
-    public T getModel()
-    {
-        return m_model;
-    }
 }

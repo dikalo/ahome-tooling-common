@@ -20,21 +20,11 @@ package com.ait.tooling.common.api.types;
 
 import java.util.Collection;
 
-public interface ITypedStringHash<T>
+public interface ITypedStringHash<T> extends ITypedDictionary<T>
 {
-    public boolean isEmpty();
-
-    public Collection<String> keys();
-
-    public T get(String name);
-
     public void put(String name, T value);
 
     public Collection<T> elements();
 
     public void remove(String name);
-
-    public boolean isDefined(String name);
-
-    public boolean isNull(String name);
 }

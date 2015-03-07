@@ -18,6 +18,7 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IDataModel<T extends IDataModel<T>>
+public interface ITypedDictionary<R> extends IDictionary
 {
+    public R get(String name);
 }

@@ -19,11 +19,10 @@
 package com.ait.tooling.common.api.factory;
 
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractCachedAsyncFactoryRegistry<T, A, C extends IFactoryContext> extends AbstractAsyncFactoryRegistry<T, A, C> implements IAsyncCachedFactory<T, A, C>
+public abstract class AbstractCachedFactoryRegistry<T, A, C extends IFactoryContext> extends AbstractFactoryRegistry<T, A, C> implements ICachedFactory<T, A, C>
 {
     private long                                           m_glive = 0;
 
@@ -31,61 +30,38 @@ public abstract class AbstractCachedAsyncFactoryRegistry<T, A, C extends IFactor
 
     private final LinkedHashMap<String, TTLCachedValue<T>> m_cache = new LinkedHashMap<String, TTLCachedValue<T>>();
 
-    protected AbstractCachedAsyncFactoryRegistry()
+    protected AbstractCachedFactoryRegistry()
     {
         this(false);
     }
 
-    protected AbstractCachedAsyncFactoryRegistry(final boolean canmodify)
+    protected AbstractCachedFactoryRegistry(final boolean canmodify)
     {
         super(canmodify);
     }
 
     @Override
-    public void create(final String type, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    public T create(final String type, final A args, final C context) throws FactoryException
     {
-        Objects.requireNonNull(callback);
-
         final String name = StringOps.requireTrimOrNull(type);
 
-        try
+        final TTLCachedValue<T> entry = getEntry(name);
+
+        if (null != entry)
         {
-            final TTLCachedValue<T> entry = getEntry(name);
-
-            if (null != entry)
-            {
-                callback.accept(entry.getValue());
-            }
-            else
-            {
-                super.create(name, args, context, new IAsyncFactoryResult<T>()
-                {
-                    @Override
-                    public void accept(final T result)
-                    {
-                        if (null == result)
-                        {
-                            onFailure(new UndefinedFactoryException(name));
-                        }
-                        else
-                        {
-                            m_cache.put(name, new TTLCachedValue<T>(result, getTimeStamp()));
-
-                            callback.accept(result);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(final Throwable caught)
-                    {
-                        callback.onFailure(caught);
-                    }
-                });
-            }
+            return entry.getValue();
         }
-        catch (Exception caught)
+        else
         {
-            callback.onFailure(caught);
+            final T result = super.create(name, args, context);
+
+            if (null == result)
+            {
+                throw new UndefinedFactoryException(name);
+            }
+            m_cache.put(name, new TTLCachedValue<T>(result, getTimeStamp()));
+
+            return result;
         }
     }
 
