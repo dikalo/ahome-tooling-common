@@ -43,6 +43,8 @@ public interface IMixedStringHash
     public boolean isObject(String name);
 
     public boolean isString(String name);
+    
+    public boolean isNativeFunction(String name);
 
     public Collection<String> keys();
 

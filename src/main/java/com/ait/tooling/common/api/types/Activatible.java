@@ -12,35 +12,41 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
-   Author: Dean S. Jones
  */
 
 package com.ait.tooling.common.api.types;
 
-public interface IMixedList
+import com.ait.tooling.common.api.types.IActivatable;
+
+public class Activatible implements IActivatable
 {
-    public void clear();
+    private boolean m_active;
 
-    public boolean isArray(int index);
+    public Activatible()
+    {
+        this(true);
+    }
 
-    public boolean isBoolean(int index);
+    public Activatible(final boolean active)
+    {
+        m_active = active;
+    }
 
-    public boolean isDouble(int index);
+    @Override
+    public boolean isActive()
+    {
+        return m_active;
+    }
 
-    public boolean isEmpty();
+    @Override
+    public boolean setActive(final boolean active)
+    {
+        if (active != m_active)
+        {
+            m_active = active;
 
-    public boolean isInteger(int index);
-
-    public boolean isNull(int index);
-
-    public boolean isNumber(int index);
-
-    public boolean isObject(int index);
-
-    public boolean isString(int index);
-
-    public boolean isNativeFunction(int index);
-
-    public int size();
+            return true;
+        }
+        return false;
+    }
 }
