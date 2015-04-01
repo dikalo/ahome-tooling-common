@@ -18,7 +18,7 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface ICachedFactory<T, A, C extends IFactoryContext> extends IFactory<T, A, C>
+public interface ICachedFactory<T, A> extends IFactory<T, A>
 {
     public void clear();
 

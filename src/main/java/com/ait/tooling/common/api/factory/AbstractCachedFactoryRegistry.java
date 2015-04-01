@@ -22,7 +22,7 @@ import java.util.LinkedHashMap;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractCachedFactoryRegistry<T, A, C extends IFactoryContext> extends AbstractFactoryRegistry<T, A, C> implements ICachedFactory<T, A, C>
+public abstract class AbstractCachedFactoryRegistry<T, A> extends AbstractFactoryRegistry<T, A> implements ICachedFactory<T, A>
 {
     private long                                           m_glive = 0;
 
@@ -41,7 +41,7 @@ public abstract class AbstractCachedFactoryRegistry<T, A, C extends IFactoryCont
     }
 
     @Override
-    public T create(final String type, final A args, final C context) throws FactoryException
+    public T create(final String type, final A args, final IFactoryContext context) throws FactoryException
     {
         final String name = StringOps.requireTrimOrNull(type);
 

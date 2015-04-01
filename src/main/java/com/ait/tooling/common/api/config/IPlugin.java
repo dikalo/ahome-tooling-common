@@ -12,15 +12,24 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
-   Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.factory;
+package com.ait.tooling.common.api.config;
 
-import com.ait.tooling.common.api.types.ITypedDictionary;
+import java.util.Collection;
 
-public interface IFactoryRegistry<T, A> extends IFactory<T, A>, ITypedDictionary<IFactory<T, A>>
+import com.ait.tooling.common.api.types.IActivatable;
+import com.ait.tooling.common.api.types.IStringValued;
+
+public interface IPlugin<F> extends IActivatable
 {
-    public boolean isModifiable();
+    public String getVersion();
+
+    public String getNameSpace();
+
+    public Collection<String> keys();
+
+    public F getFactory(String name);
+
+    public F getFactory(IStringValued type);
 }

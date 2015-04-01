@@ -18,7 +18,7 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface IFactory<T, A, C extends IFactoryContext>
+public interface IFactory<T, A>
 {
-    public T create(String name, A args, C context) throws FactoryException;
+    public T create(String name, A args, IFactoryContext context) throws FactoryException;
 }

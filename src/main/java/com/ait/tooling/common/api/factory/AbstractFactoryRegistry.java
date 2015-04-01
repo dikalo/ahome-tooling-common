@@ -25,11 +25,11 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractFactoryRegistry<T, A, C extends IFactoryContext> implements IFactoryRegistry<T, A, C>
+public abstract class AbstractFactoryRegistry<T, A> implements IFactoryRegistry<T, A>
 {
-    private boolean                                        m_canmodify;
+    private boolean                                     m_canmodify;
 
-    private final LinkedHashMap<String, IFactory<T, A, C>> m_factories = new LinkedHashMap<String, IFactory<T, A, C>>();
+    private final LinkedHashMap<String, IFactory<T, A>> m_factories = new LinkedHashMap<String, IFactory<T, A>>();
 
     protected AbstractFactoryRegistry()
     {
@@ -83,16 +83,16 @@ public abstract class AbstractFactoryRegistry<T, A, C extends IFactoryContext> i
     }
 
     @Override
-    public IFactory<T, A, C> get(final String name)
+    public IFactory<T, A> get(final String name)
     {
         return m_factories.get(StringOps.requireTrimOrNull(name));
     }
 
-    protected void putFactory(String name, final IFactory<T, A, C> factory)
+    protected void putFactory(String name, final IFactory<T, A> factory)
     {
         name = StringOps.requireTrimOrNull(name);
 
-        final IFactory<T, A, C> last = get(name);
+        final IFactory<T, A> last = get(name);
 
         if (isModifiable())
         {
@@ -133,11 +133,11 @@ public abstract class AbstractFactoryRegistry<T, A, C extends IFactoryContext> i
     }
 
     @Override
-    public T create(final String type, final A args, final C context) throws FactoryException
+    public T create(final String type, final A args, final IFactoryContext context) throws FactoryException
     {
         final String name = StringOps.requireTrimOrNull(type);
 
-        final IFactory<T, A, C> factory = get(name);
+        final IFactory<T, A> factory = get(name);
 
         if (null == factory)
         {
@@ -149,7 +149,7 @@ public abstract class AbstractFactoryRegistry<T, A, C extends IFactoryContext> i
         }
     }
 
-    protected T getDefault(final String name, final A args, final C context) throws FactoryException
+    protected T getDefault(final String name, final A args, final IFactoryContext context) throws FactoryException
     {
         throw new UndefinedFactoryException(name);
     }
