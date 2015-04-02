@@ -12,13 +12,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
-   Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.factory;
+package com.ait.tooling.common.api.logging;
 
-public interface IFactoryContext
+public interface ILogging
 {
-    public <T> T getProvider(String name, Class<T> type);
+    public void log(String message);
+
+    public void warn(String message);
+
+    public void error(String message);
+
+    public void error(String message, Throwable e);
 }

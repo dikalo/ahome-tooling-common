@@ -25,11 +25,11 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryContext> implements IAsyncFactoryRegistry<T, A, C>
+public abstract class AbstractAsyncFactoryRegistry<T, A> implements IAsyncFactoryRegistry<T, A>
 {
     private boolean                                             m_canmodify;
 
-    private final LinkedHashMap<String, IAsyncFactory<T, A, C>> m_factories = new LinkedHashMap<String, IAsyncFactory<T, A, C>>();
+    private final LinkedHashMap<String, IAsyncFactory<T, A>> m_factories = new LinkedHashMap<String, IAsyncFactory<T, A>>();
 
     protected AbstractAsyncFactoryRegistry()
     {
@@ -83,16 +83,16 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
     }
 
     @Override
-    public IAsyncFactory<T, A, C> get(final String name)
+    public IAsyncFactory<T, A> get(final String name)
     {
         return m_factories.get(StringOps.requireTrimOrNull(name));
     }
 
-    protected void putFactory(String name, final IAsyncFactory<T, A, C> factory)
+    protected void putFactory(String name, final IAsyncFactory<T, A> factory)
     {
         name = StringOps.requireTrimOrNull(name);
 
-        final IAsyncFactory<T, A, C> last = get(name);
+        final IAsyncFactory<T, A> last = get(name);
 
         if (isModifiable())
         {
@@ -133,7 +133,7 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
     }
 
     @Override
-    public void create(final String type, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    public void create(final String type, final A args, final IFactoryContext context, final IAsyncFactoryResult<T> callback)
     {
         Objects.requireNonNull(callback);
 
@@ -141,7 +141,7 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
 
         try
         {
-            final IAsyncFactory<T, A, C> factory = get(name);
+            final IAsyncFactory<T, A> factory = get(name);
 
             if (null == factory)
             {
@@ -178,7 +178,7 @@ public abstract class AbstractAsyncFactoryRegistry<T, A, C extends IFactoryConte
         }
     }
 
-    protected void getDefault(final String name, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    protected void getDefault(final String name, final A args, final IFactoryContext context, final IAsyncFactoryResult<T> callback)
     {
         callback.onFailure(new UndefinedFactoryException(name));
     }

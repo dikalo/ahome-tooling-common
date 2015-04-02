@@ -12,13 +12,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-   
-   Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.factory;
+package com.ait.tooling.common.api.config;
 
-public interface IFactoryContext
+import java.util.Collection;
+
+public interface IPluginRegistry
 {
-    public <T> T getProvider(String name, Class<T> type);
+    public boolean addPlugin(IPlugin<?> plugin);
+
+    public IPlugin<?> getPlugin(String name);
+
+    public Collection<IPlugin<?>> getPlugins();
 }

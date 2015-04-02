@@ -20,7 +20,7 @@ package com.ait.tooling.common.api.factory;
 
 import com.ait.tooling.common.api.types.ITypedDictionary;
 
-public interface IAsyncFactoryRegistry<T, A, C extends IFactoryContext> extends IAsyncFactory<T, A, C>, ITypedDictionary<IAsyncFactory<T, A, C>>
+public interface IAsyncFactoryRegistry<T, A> extends IAsyncFactory<T, A>, ITypedDictionary<IAsyncFactory<T, A>>
 {
     public boolean isModifiable();
 }

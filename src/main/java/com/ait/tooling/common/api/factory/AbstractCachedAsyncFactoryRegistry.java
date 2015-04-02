@@ -23,7 +23,7 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public abstract class AbstractCachedAsyncFactoryRegistry<T, A, C extends IFactoryContext> extends AbstractAsyncFactoryRegistry<T, A, C> implements IAsyncCachedFactory<T, A, C>
+public abstract class AbstractCachedAsyncFactoryRegistry<T, A> extends AbstractAsyncFactoryRegistry<T, A> implements IAsyncCachedFactory<T, A>
 {
     private long                                           m_glive = 0;
 
@@ -42,7 +42,7 @@ public abstract class AbstractCachedAsyncFactoryRegistry<T, A, C extends IFactor
     }
 
     @Override
-    public void create(final String type, final A args, final C context, final IAsyncFactoryResult<T> callback)
+    public void create(final String type, final A args, final IFactoryContext context, final IAsyncFactoryResult<T> callback)
     {
         Objects.requireNonNull(callback);
 
