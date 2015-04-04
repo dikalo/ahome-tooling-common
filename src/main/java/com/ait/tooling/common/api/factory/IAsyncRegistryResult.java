@@ -18,33 +18,9 @@
 
 package com.ait.tooling.common.api.factory;
 
-import java.util.Objects;
+import com.ait.tooling.common.api.java.util.function.Consumer;
 
-import com.ait.tooling.common.api.types.ITimeStamped;
-import com.ait.tooling.common.api.types.IValued;
-
-public final class TTLCachedValue<T> implements IValued<T>, ITimeStamped
+public interface IAsyncRegistryResult<T> extends Consumer<T>
 {
-    private final T    m_value;
-
-    private final long m_stamp;
-
-    public TTLCachedValue(final T value, final long timestamp)
-    {
-        m_value = Objects.requireNonNull(value);
-
-        m_stamp = Math.max(timestamp, 0);
-    }
-
-    @Override
-    public final T getValue()
-    {
-        return m_value;
-    }
-
-    @Override
-    public final long getTimeStamp()
-    {
-        return m_stamp;
-    }
+    public void onFailure(Throwable caught);
 }

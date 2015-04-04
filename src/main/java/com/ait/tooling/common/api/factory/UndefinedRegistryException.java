@@ -18,7 +18,11 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface IAsyncFactory<T, A>
+@SuppressWarnings("serial")
+public final class UndefinedRegistryException extends RegistryException
 {
-    public void create(String name, A args, IFactoryContext context, IAsyncFactoryResult<T> callback);
+    public UndefinedRegistryException(final String type)
+    {
+        super("Undefined type: " + type);
+    }
 }

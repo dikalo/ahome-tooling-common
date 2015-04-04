@@ -18,9 +18,11 @@
 
 package com.ait.tooling.common.api.factory;
 
-import com.ait.tooling.common.api.types.ITypedDictionary;
-
-public interface IFactoryRegistry<T, A> extends IFactory<T, A>, ITypedDictionary<IFactory<T, A>>
+@SuppressWarnings("serial")
+public final class UnmodifiableRegistryException extends RuntimeException
 {
-    public boolean isModifiable();
+    public UnmodifiableRegistryException(final String type)
+    {
+        super("Registry is unmodifiable for type: " + type);
+    }
 }

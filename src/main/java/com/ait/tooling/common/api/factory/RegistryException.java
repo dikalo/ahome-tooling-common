@@ -12,17 +12,27 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+   
+   Author: Dean S. Jones
  */
 
-package com.ait.tooling.common.api.config;
+package com.ait.tooling.common.api.factory;
 
-import java.util.Collection;
-
-public interface IPluginRegistry
+@SuppressWarnings("serial")
+public class RegistryException extends Exception
 {
-    public boolean addPlugin(IPlugin<?> plugin);
+    public RegistryException(final String message)
+    {
+        super(message);
+    }
 
-    public IPlugin<?> getPlugin(String name);
+    public RegistryException(final Throwable cause)
+    {
+        super(cause);
+    }
 
-    public Collection<IPlugin<?>> getPlugins();
+    public RegistryException(final String message, final Throwable cause)
+    {
+        super(message, cause);
+    }
 }

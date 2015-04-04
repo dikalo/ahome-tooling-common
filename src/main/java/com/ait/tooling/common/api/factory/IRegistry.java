@@ -18,7 +18,9 @@
 
 package com.ait.tooling.common.api.factory;
 
-public interface IFactoryContext
+import com.ait.tooling.common.api.types.ITypedDictionary;
+
+public interface IRegistry<R> extends ITypedDictionary<R>
 {
-    public <T> T getProvider(String name, Class<T> type);
+    public boolean isModifiable();
 }

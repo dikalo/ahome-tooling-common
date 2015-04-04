@@ -18,11 +18,9 @@
 
 package com.ait.tooling.common.api.factory;
 
-@SuppressWarnings("serial")
-public final class UnmodifiableFactoryException extends RuntimeException
+import com.ait.tooling.common.api.types.IDictionary;
+
+public interface IAsyncRegistry<T> extends IDictionary
 {
-    public UnmodifiableFactoryException(final String type)
-    {
-        super("Factory is unmodifiable for type: " + type);
-    }
+    public boolean isModifiable();
 }
