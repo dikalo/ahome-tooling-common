@@ -28,9 +28,7 @@ public final class UUID
 
     public static final String uuid()
     {
-        int r;
-
-        char[] uuid = new char[36];
+        final char[] uuid = new char[36];
 
         // rfc4122 requires these characters
 
@@ -45,7 +43,7 @@ public final class UUID
         {
             if (uuid[i] == 0)
             {
-                r = (int) (Math.random() * 16);
+                final int r = (int) (Math.random() * 16);
 
                 uuid[i] = CHARS[(i == 19) ? (r & 0x3) | 0x8 : r & 0xf];
             }

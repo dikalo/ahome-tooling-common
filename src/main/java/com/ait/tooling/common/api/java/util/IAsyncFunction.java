@@ -18,11 +18,9 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.util.Collection;
-
 import com.ait.tooling.common.api.java.util.function.Consumer;
 
-public interface IAsyncFilter<T>
+public interface IAsyncFunction<T, R>
 {
-    public void filter(Collection<T> collection, Consumer<Collection<T>> callback);
+    public void apply(T target, Consumer<R> callback);
 }

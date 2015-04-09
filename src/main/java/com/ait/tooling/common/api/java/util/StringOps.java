@@ -72,7 +72,7 @@ public final class StringOps
         return toArray(uniq);
     }
 
-    public static final String[] toUniqueArray(String... collection)
+    public static final String[] toUniqueArray(final String... collection)
     {
         if ((null == collection) || (collection.length < 1))
         {
@@ -82,7 +82,7 @@ public final class StringOps
 
         for (int i = 0; i < collection.length; i++)
         {
-            String s = collection[i];
+            final String s = collection[i];
 
             if (null != s)
             {
