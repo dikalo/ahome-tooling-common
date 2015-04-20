@@ -14,24 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.json;
+package com.ait.tooling.common.api.hash;
 
-import com.ait.tooling.common.api.types.IStringValued;
-
-public enum JSONType implements IStringValued
+public interface ISHA_512_HASH
 {
-    ARRAY("array"), OBJECT("object"), STRING("string"), NUMBER("number"), BOOLEAN("boolean"), DATE("date"), FUNCTION("function"), UNDEFINED("undefined"), NULL("null");
-
-    private final String m_value;
-
-    private JSONType(final String value)
-    {
-        m_value = value;
-    }
-
-    @Override
-    public final String getValue()
-    {
-        return m_value;
-    }
+    public String SHA512(String string);
 }

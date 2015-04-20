@@ -18,41 +18,77 @@ package com.ait.tooling.common.api.java.util;
 
 public interface IHTTPConstants
 {
-    public static final String CHARSET_UTF_8                 = "UTF-8";
+    public static final String CHARSET_UTF_8                    = "UTF-8";
 
-    public static final String CONTENT_TEXT_PLAIN            = "text/plain";
+    public static final String CONTENT_TEXT_PLAIN               = "text/plain";
 
-    public static final String CONTENT_TYPE_HTML             = "text/html";
+    public static final String CONTENT_TYPE_HTML                = "text/html";
 
-    public static final String CONTENT_TYPE_TEXT_XML         = "text/xml";
+    public static final String CONTENT_TYPE_TEXT_XML            = "text/xml";
 
-    public static final String CONTENT_TYPE_APPLICATION_XML  = "application/xml";
+    public static final String CONTENT_TYPE_APPLICATION_XML     = "application/xml";
 
-    public static final String CONTENT_TYPE_APPLICATION_JSON = "application/json";
+    public static final String CONTENT_TYPE_APPLICATION_JSON    = "application/json";
 
-    public static final String ACCEPT_HEADER                 = "Accept";
+    public static final String ACCEPT_HEADER                    = "Accept";
 
-    public static final String CONTENT_TYPE_HEADER           = "Content-Type";
+    public static final String CONTENT_TYPE_HEADER              = "Content-Type";
 
-    public static final String USER_AGENT_HEADER             = "User-Agent";
+    public static final String USER_AGENT_HEADER                = "User-Agent";
 
-    public static final String FORWARDED_FOR_HEADER          = "X-Forwarded-For";
+    public static final String CACHE_CONTROL_HEADER             = "Cache-Control";
 
-    public static final String USER_ID_HEADER                = "X-User-ID";
+    public static final String CONTENT_LENGTH_HEADER            = "Content-Length";
 
-    public static final String USER_NAME_HEADER              = "X-User-Name";
+    public static final String DATE_HEADER                      = "Date";
 
-    public static final String CLIENT_VERSION_HEADER         = "X-Client-Version";
+    public static final String PRAGMA_HEADER                    = "Pragma";
 
-    public static final String SESSION_ID_HEADER             = "X-Session-ID";
+    public static final String ACCEPT_CHARSET_HEADER            = "Accept-Charset";
 
-    public static final String CLIENT_UUID_HEADER            = "X-Client-UUID";
+    public static final String ACCEPT_ENCODING_HEADER           = "Accept-Encoding";
 
-    public static final String SESSION_UUID_HEADER           = "X-Session-UUID";
+    public static final String ACCEPT_LANGUAGE_HEADER           = "Accept-Language";
 
-    public static final String CLIENT_NAME_HEADER            = "X-Client-Name";
+    public static final String COOKIE_HEADER                    = "Cookie";
 
-    public static final String SCHEMA_VERSION_HEADER         = "X-Schema-Version";
+    public static final String IF_UNMODIFIED_SINCE_HEADER       = "If-Unmodified-Since";
 
-    public static final String XSRF_TOKEN_HEADER             = "X-Request-XSRFToken";
+    public static final String REFERER_HEADER                   = "Referer";
+
+    public static final String UPGRADE_HEADER                   = "Upgrade";
+
+    public static final String CONTENT_DISPOSITION_HEADER       = "Content-Disposition";
+
+    public static final String EXPIRES_HEADER                   = "Expires";
+
+    public static final String SET_COOKIE_HEADER                = "Set-Cookie";
+
+    public static final String STRICT_TRANSPORT_SECURITY_HEADER = "Strict-Transport-Security";
+
+    public static final String X_FRAME_OPTIONS_HEADER           = "X-Frame-Options";
+
+    public static final String X_POWERED_BY_HEADER              = "X-Powered-By";
+
+    public static final String X_XSS_PROTECTION_HEADER          = "X-XSS-Protection";
+
+    public static final String X_FORWARDED_FOR_HEADER           = "X-Forwarded-For";
+
+    public static final String X_USER_ID_HEADER                 = "X-User-ID";
+
+    public static final String X_USER_NAME_HEADER               = "X-User-Name";
+
+    public static final String X_CLIENT_VERSION_HEADER          = "X-Client-Version";
+
+    public static final String X_SESSION_ID_HEADER              = "X-Session-ID";
+
+    public static final String X_CLIENT_UUID_HEADER             = "X-Client-UUID";
+
+    public static final String X_SESSION_UUID_HEADER            = "X-Session-UUID";
+
+    public static final String X_CLIENT_NAME_HEADER             = "X-Client-Name";
+
+    public static final String X_SCHEMA_VERSION_HEADER          = "X-Schema-Version";
+
+    public static final String X_XSRF_TOKEN_HEADER              = "X-Request-XSRFToken";
 }
