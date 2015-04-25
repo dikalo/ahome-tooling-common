@@ -5,6 +5,25 @@ Ahome Tooling Common is a package containing often used interfaces and utility c
 
 https://github.com/ahome-it/ahome-tooling-common
 
+Downloading artifacts
+
+SNAPSHOT:
+
+```xml
+<repositories>
+  <repository>
+  <id>sonatype</id>
+  <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+  </repository>
+</repositories>
+
+<dependency>
+  <groupId>com.ahome-it</groupId>
+  <artifactId>ahome-tooling-common</artifactId>
+  <version>1.0.26-SNAPSHOT</version>
+</dependency>
+```
+
 License
 
 Ahome Tooling Common is released under version 2.0 of the Apache License.
