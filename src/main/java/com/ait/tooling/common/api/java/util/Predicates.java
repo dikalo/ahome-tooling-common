@@ -52,34 +52,54 @@ public final class Predicates
         };
     }
 
-    public static final <T> Predicate<T> and(final Predicate<? super T> p1, final Predicate<? super T> p2)
+    @SafeVarargs
+    public static final <T> Predicate<T> and(final Predicate<? super T> predicate, final Predicate<? super T>... list)
     {
-        Objects.requireNonNull(p1);
-
-        Objects.requireNonNull(p2);
+        Objects.requireNonNull(predicate);
 
         return new Predicate<T>()
         {
             @Override
             public final boolean test(final T value)
             {
-                return (p1.test(value) && p2.test(value));
+                if (false == predicate.test(value))
+                {
+                    return false;
+                }
+                for (Predicate<? super T> pred : list)
+                {
+                    if (false == pred.test(value))
+                    {
+                        return false;
+                    }
+                }
+                return true;
             }
         };
     }
 
-    public static final <T> Predicate<T> or(final Predicate<? super T> p1, final Predicate<? super T> p2)
+    @SafeVarargs
+    public static final <T> Predicate<T> or(final Predicate<? super T> predicate, final Predicate<? super T>... list)
     {
-        Objects.requireNonNull(p1);
-
-        Objects.requireNonNull(p2);
+        Objects.requireNonNull(predicate);
 
         return new Predicate<T>()
         {
             @Override
             public final boolean test(final T value)
             {
-                return (p1.test(value) || p2.test(value));
+                if (predicate.test(value))
+                {
+                    return true;
+                }
+                for (Predicate<? super T> pred : list)
+                {
+                    if (pred.test(value))
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
         };
     }

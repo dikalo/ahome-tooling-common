@@ -20,7 +20,7 @@ SNAPSHOT:
 <dependency>
   <groupId>com.ahome-it</groupId>
   <artifactId>ahome-tooling-common</artifactId>
-  <version>1.0.27-SNAPSHOT</version>
+  <version>1.0.29-SNAPSHOT</version>
 </dependency>
 ```
 

@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import com.ait.tooling.common.api.java.util.function.Consumer;
-import com.ait.tooling.common.api.java.util.function.Supplier;
-
-public interface IQueue<T> extends Supplier<T>, Consumer<T>
+public interface INamedDefinition extends INamed
 {
+    public void setName(String name);
 }
