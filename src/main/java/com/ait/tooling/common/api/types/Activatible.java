@@ -24,7 +24,7 @@ public class Activatible implements IActivatable
 
     public Activatible()
     {
-        this(true);
+        this(false);
     }
 
     public Activatible(final boolean active)
