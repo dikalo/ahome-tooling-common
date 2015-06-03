@@ -29,29 +29,29 @@ public final class Filters
     {
     }
 
-    public static final <T> IFilter<T> make(Predicate<T> predicate)
+    public static final <T> IFilter<T> make(final Predicate<T> predicate)
     {
-        return new PredicateFilter<T>(predicate);
+        return new PredicateFilter<T>(Objects.requireNonNull(predicate));
     }
 
-    public static final <T> IFilter<T> make(Predicate<T> predicate, Comparator<T> compareit)
+    public static final <T> IFilter<T> make(final Predicate<T> predicate, final Comparator<T> compareit)
     {
-        return new SortingPredicateFilter<T>(predicate, compareit);
+        return new SortingPredicateFilter<T>(Objects.requireNonNull(predicate), Objects.requireNonNull(compareit));
     }
 
-    public static final <T> IAsyncFilter<T> async(Predicate<T> predicate)
+    public static final <T> IAsyncFilter<T> async(final Predicate<T> predicate)
     {
-        return new AsyncPredicateFilter<T>(predicate);
+        return new AsyncPredicateFilter<T>(Objects.requireNonNull(predicate));
     }
 
-    public static final <T> IAsyncFilter<T> async(Predicate<T> predicate, Comparator<T> compareit)
+    public static final <T> IAsyncFilter<T> async(final Predicate<T> predicate, final Comparator<T> compareit)
     {
-        return new AsyncSortingPredicateFilter<T>(predicate, compareit);
+        return new AsyncSortingPredicateFilter<T>(Objects.requireNonNull(predicate), Objects.requireNonNull(compareit));
     }
 
-    public static final <T> Collection<T> filter(Collection<T> collection, Predicate<T> predicate)
+    public static final <T> Collection<T> filter(final Collection<T> collection, final Predicate<T> predicate)
     {
-        Objects.requireNonNull(collection);
+        Objects.requireNonNull(predicate);
 
         if (collection.isEmpty())
         {
@@ -63,9 +63,11 @@ public final class Filters
         }
     }
 
-    public static final <T> Collection<T> filter(Collection<T> collection, Predicate<T> predicate, Comparator<T> compareit)
+    public static final <T> Collection<T> filter(final Collection<T> collection, final Predicate<T> predicate, final Comparator<T> compareit)
     {
-        Objects.requireNonNull(collection);
+        Objects.requireNonNull(predicate);
+
+        Objects.requireNonNull(compareit);
 
         if (collection.isEmpty())
         {
@@ -77,11 +79,9 @@ public final class Filters
         }
     }
 
-    public static final <T> Collection<T> filter(Collection<T> collection, IFilter<T> filter)
+    public static final <T> Collection<T> filter(final Collection<T> collection, final IFilter<T> filter)
     {
         Objects.requireNonNull(filter);
-
-        Objects.requireNonNull(collection);
 
         if (collection.isEmpty())
         {
@@ -93,9 +93,11 @@ public final class Filters
         }
     }
 
-    public static final <T> void filter(Collection<T> collection, Predicate<T> predicate, Consumer<Collection<T>> callback)
+    public static final <T> void filter(final Collection<T> collection, final Predicate<T> predicate, final Consumer<Collection<T>> callback)
     {
-        Objects.requireNonNull(collection);
+        Objects.requireNonNull(predicate);
+
+        Objects.requireNonNull(callback);
 
         if (collection.isEmpty())
         {
@@ -107,9 +109,13 @@ public final class Filters
         }
     }
 
-    public static final <T> void filter(Collection<T> collection, Predicate<T> predicate, Comparator<T> compareit, Consumer<Collection<T>> callback)
+    public static final <T> void filter(final Collection<T> collection, final Predicate<T> predicate, final Comparator<T> compareit, final Consumer<Collection<T>> callback)
     {
-        Objects.requireNonNull(collection);
+        Objects.requireNonNull(predicate);
+
+        Objects.requireNonNull(compareit);
+
+        Objects.requireNonNull(callback);
 
         if (collection.isEmpty())
         {

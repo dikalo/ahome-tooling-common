@@ -16,6 +16,8 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
@@ -53,19 +55,20 @@ public final class Predicates
     }
 
     @SafeVarargs
-    public static final <T> Predicate<T> and(final Predicate<? super T> predicate, final Predicate<? super T>... list)
+    public static final <T> Predicate<T> and(final Predicate<? super T>... predicates)
     {
-        Objects.requireNonNull(predicate);
+        return and(Arrays.asList(Objects.requireNonNull(predicates)));
+    }
+
+    public static final <T> Predicate<T> and(final List<Predicate<? super T>> list)
+    {
+        Objects.requireNonNull(list);
 
         return new Predicate<T>()
         {
             @Override
             public final boolean test(final T value)
             {
-                if (false == predicate.test(value))
-                {
-                    return false;
-                }
                 for (Predicate<? super T> pred : list)
                 {
                     if (false == pred.test(value))
@@ -79,19 +82,20 @@ public final class Predicates
     }
 
     @SafeVarargs
-    public static final <T> Predicate<T> or(final Predicate<? super T> predicate, final Predicate<? super T>... list)
+    public static final <T> Predicate<T> or(final Predicate<? super T>... predicates)
     {
-        Objects.requireNonNull(predicate);
+        return or(Arrays.asList(Objects.requireNonNull(predicates)));
+    }
+
+    public static final <T> Predicate<T> or(final List<Predicate<? super T>> list)
+    {
+        Objects.requireNonNull(list);
 
         return new Predicate<T>()
         {
             @Override
             public final boolean test(final T value)
             {
-                if (predicate.test(value))
-                {
-                    return true;
-                }
                 for (Predicate<? super T> pred : list)
                 {
                     if (pred.test(value))
@@ -115,9 +119,13 @@ public final class Predicates
                 {
                     return true;
                 }
-                if (value != null)
+                if (null != value)
                 {
                     return value.equals(object);
+                }
+                if (null != object)
+                {
+                    return object.equals(value);
                 }
                 return false;
             }

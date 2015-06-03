@@ -16,16 +16,18 @@
 
 package com.ait.tooling.common.api.factory;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Objects;
 
-import com.ait.tooling.common.api.java.util.StringOps;
 import com.ait.tooling.common.api.java.util.function.Supplier;
 import com.ait.tooling.common.api.types.IStringValued;
 
-public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
+@SuppressWarnings("serial")
+public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>, Serializable
 {
     private boolean                                  m_canmodify;
 
@@ -57,7 +59,7 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
     @Override
     public final boolean isDefined(final String name)
     {
-        return m_suppliers.containsKey(StringOps.requireTrimOrNull(name));
+        return m_suppliers.containsKey(Objects.requireNonNull(name));
     }
 
     @Override
@@ -75,20 +77,20 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
     @Override
     public final boolean isNull(final String name)
     {
-        return (null == m_suppliers.get(StringOps.requireTrimOrNull(name)));
+        return (null == m_suppliers.get(Objects.requireNonNull(name)));
     }
 
     @Override
-    public final Collection<String> keys()
+    public final List<String> keys()
     {
-        return Collections.unmodifiableSet(m_suppliers.keySet());
+        return Collections.unmodifiableList(new ArrayList<String>(m_suppliers.keySet()));
     }
 
-    public synchronized void get(String name, final IAsyncRegistryResult<F> callback)
+    public synchronized void get(final String name, final IAsyncRegistryResult<F> callback)
     {
-        name = StringOps.requireTrimOrNull(name);
-
-        F factory = m_factories.get(name);
+        Objects.requireNonNull(callback);
+        
+        F factory = m_factories.get(Objects.requireNonNull(name));
 
         if (null == factory)
         {
@@ -106,7 +108,7 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
         }
         if (null == factory)
         {
-            callback.onFailure(new UndefinedRegistryException(name));
+            callback.onFailure(new UndefinedTypeRegistryException(name));
         }
         else
         {
@@ -116,14 +118,14 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
 
     protected synchronized void putFactorySupplier(final IStringValued name, final Supplier<F> supplier)
     {
-        putFactorySupplier(name.getValue(), supplier);
+        putFactorySupplier(Objects.requireNonNull(Objects.requireNonNull(name).getValue()), Objects.requireNonNull(supplier));
     }
 
-    protected synchronized void putFactorySupplier(String name, Supplier<F> supplier)
+    protected synchronized void putFactorySupplier(final String name, final Supplier<F> supplier)
     {
-        name = StringOps.requireTrimOrNull(name);
+        Objects.requireNonNull(name);
 
-        supplier = Objects.requireNonNull(supplier);
+        Objects.requireNonNull(supplier);
 
         if (isModifiable())
         {

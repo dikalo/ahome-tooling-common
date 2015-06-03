@@ -16,21 +16,41 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IMixedStringHash extends IDictionary
+import java.io.Serializable;
+
+import com.ait.tooling.common.api.types.IActivatable;
+
+public class Activatable implements IActivatable, Serializable
 {
-    public boolean isArray(String name);
+    private static final long serialVersionUID = -7816996046350441349L;
 
-    public boolean isBoolean(String name);
+    private boolean           m_active;
 
-    public boolean isDouble(String name);
+    public Activatable()
+    {
+        this(false);
+    }
 
-    public boolean isInteger(String name);
+    public Activatable(final boolean active)
+    {
+        m_active = active;
+    }
 
-    public boolean isNumber(String name);
+    @Override
+    public boolean isActive()
+    {
+        return m_active;
+    }
 
-    public boolean isObject(String name);
+    @Override
+    public boolean setActive(final boolean active)
+    {
+        if (active != m_active)
+        {
+            m_active = active;
 
-    public boolean isString(String name);
-
-    public boolean isNativeFunction(String name);
+            return true;
+        }
+        return false;
+    }
 }

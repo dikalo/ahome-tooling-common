@@ -18,11 +18,12 @@ package com.ait.tooling.common.api.model;
 
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 public abstract class AbstractModelRepresentation<T> implements IModel<T>
 {
     private final T m_model;
 
-    protected AbstractModelRepresentation(T model)
+    protected AbstractModelRepresentation(final T model)
     {
         m_model = Objects.requireNonNull(model);
     }

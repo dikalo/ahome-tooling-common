@@ -16,9 +16,10 @@
 
 package com.ait.tooling.common.api.factory;
 
-@SuppressWarnings("serial")
 public class RegistryException extends Exception
 {
+    private static final long serialVersionUID = 9193820327029021129L;
+
     public RegistryException(final String message)
     {
         super(message);

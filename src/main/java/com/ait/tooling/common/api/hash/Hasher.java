@@ -17,38 +17,45 @@
 package com.ait.tooling.common.api.hash;
 
 import java.util.Objects;
+import java.util.Random;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public final class Hasher implements ISHA_512_HASH_SALT
+public final class Hasher implements IHasher
 {
-    private final ISHA_512_HASH m_hash;
+    private static final long serialVersionUID = -2752202273489654010L;
 
-    public Hasher(final ISHA_512_HASH hash)
+    private final Random      m_rand           = new Random();
+
+    private final IHash512    m_hash;
+
+    public Hasher(final IHash512 hash)
     {
         m_hash = Objects.requireNonNull(hash);
     }
 
     @Override
-    public final String SHA512(String text, String salt)
+    public String sha512(final String text)
     {
-        text = Objects.requireNonNull(text);
-
-        salt = StringOps.requireTrimOrNull(salt);
-
-        return SHA512(text, salt, salt.length());
+        return m_hash.sha512(Objects.requireNonNull(text));
     }
 
     @Override
-    public final String SHA512(String text, String salt, int iter)
+    public String sha512(final String text, final String salt)
     {
-        text = Objects.requireNonNull(text);
+        return sha512(Objects.requireNonNull(text), Objects.requireNonNull(salt), m_rand.nextInt((salt.length() + 1) * 2));
+    }
 
-        salt = StringOps.requireTrimOrNull(salt);
+    @Override
+    public String sha512(String text, String salt, int iter)
+    {
+        Objects.requireNonNull(text);
 
-        if (iter < 1)
+        Objects.requireNonNull(salt);
+
+        if (iter < 2)
         {
-            return m_hash.SHA512(text + salt);
+            return sha512(text + salt);
         }
         if ((iter < 5) || (iter > 25))
         {
@@ -64,7 +71,7 @@ public final class Hasher implements ISHA_512_HASH_SALT
             {
                 text = salt + text;
             }
-            text = StringOps.reverse(m_hash.SHA512(text));
+            text = StringOps.reverse(sha512(text));
         }
         return text;
     }

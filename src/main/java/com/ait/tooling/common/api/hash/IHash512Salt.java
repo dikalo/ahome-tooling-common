@@ -14,13 +14,11 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.factory;
+package com.ait.tooling.common.api.hash;
 
-@SuppressWarnings("serial")
-public final class UndefinedRegistryException extends RegistryException
+public interface IHash512Salt
 {
-    public UndefinedRegistryException(final String type)
-    {
-        super("Undefined type: " + type);
-    }
+    public String sha512(String text, String salt);
+
+    public String sha512(String text, String salt, int iter);
 }

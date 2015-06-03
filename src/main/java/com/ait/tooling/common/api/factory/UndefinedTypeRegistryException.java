@@ -14,11 +14,14 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.hash;
+package com.ait.tooling.common.api.factory;
 
-public interface ISHA_512_HASH_SALT
+public class UndefinedTypeRegistryException extends RegistryException
 {
-    public String SHA512(String text, String salt);
+    private static final long serialVersionUID = -1194658841879379564L;
 
-    public String SHA512(String text, String salt, int iter);
+    public UndefinedTypeRegistryException(final String type)
+    {
+        super("Undefined type: " + type);
+    }
 }

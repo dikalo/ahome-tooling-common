@@ -16,6 +16,9 @@
 
 package com.ait.tooling.common.api.flow;
 
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
@@ -26,67 +29,29 @@ public final class Flows
     {
     }
 
-    public static interface BooleanOp
+    public static interface BooleanOp extends Serializable
     {
         public boolean test();
     }
 
-    public static final BooleanOp or(final BooleanOp op, final BooleanOp... ops)
+    public static final BooleanOp orOp(final BooleanOp... ops)
     {
-        Objects.requireNonNull(op);
-
-        return new BooleanOp()
-        {
-            @Override
-            public final boolean test()
-            {
-                if (op.test())
-                {
-                    return true;
-                }
-                for (BooleanOp or : ops)
-                {
-                    if (or.test())
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
+        return new OrBooleanOp(Arrays.asList(Objects.requireNonNull(ops)));
     }
 
-    public static final BooleanOp and(final BooleanOp op, final BooleanOp... ops)
+    public static final BooleanOp andOp(final BooleanOp... ops)
     {
-        Objects.requireNonNull(op);
-        
-        return new BooleanOp()
-        {
-            @Override
-            public final boolean test()
-            {
-                if (false == op.test())
-                {
-                    return false;
-                }
-                for (BooleanOp or : ops)
-                {
-                    if (false == or.test())
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-        };
+        return new AndBooleanOp(Arrays.asList(Objects.requireNonNull(ops)));
     }
 
-    public static final BooleanOp not(final BooleanOp op)
+    public static final BooleanOp notOp(final BooleanOp op)
     {
         Objects.requireNonNull(op);
 
         return new BooleanOp()
         {
+            private static final long serialVersionUID = 3705908438801337401L;
+
             @Override
             public final boolean test()
             {
@@ -95,12 +60,14 @@ public final class Flows
         };
     }
 
-    public static final <T> BooleanOp compose(final T value, final Predicate<T> predicate)
+    public static final <T> BooleanOp composeOp(final T value, final Predicate<T> predicate)
     {
         Objects.requireNonNull(predicate);
 
         return new BooleanOp()
         {
+            private static final long serialVersionUID = 6827650384317753155L;
+
             @Override
             public final boolean test()
             {
@@ -109,6 +76,7 @@ public final class Flows
         };
     }
 
+    @SuppressWarnings("serial")
     public static abstract class PredicateBooleanOp<T> implements BooleanOp, Predicate<T>
     {
         private final T m_value;
@@ -122,6 +90,60 @@ public final class Flows
         public final boolean test()
         {
             return test(m_value);
+        }
+    }
+
+    private static final class OrBooleanOp implements BooleanOp
+    {
+        private static final long serialVersionUID = 6587934314073977830L;
+
+        final List<BooleanOp>     m_list;
+
+        public OrBooleanOp(final List<BooleanOp> list)
+        {
+            m_list = Objects.requireNonNull(list);
+        }
+
+        @Override
+        public final boolean test()
+        {
+            final int size = m_list.size();
+
+            for (int i = 0; i < size; i++)
+            {
+                if (m_list.get(i).test())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    private static final class AndBooleanOp implements BooleanOp
+    {
+        private static final long serialVersionUID = 6347981775849160893L;
+
+        final List<BooleanOp>     m_list;
+
+        public AndBooleanOp(final List<BooleanOp> list)
+        {
+            m_list = Objects.requireNonNull(list);
+        }
+
+        @Override
+        public final boolean test()
+        {
+            final int size = m_list.size();
+
+            for (int i = 0; i < size; i++)
+            {
+                if (false == m_list.get(i).test())
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

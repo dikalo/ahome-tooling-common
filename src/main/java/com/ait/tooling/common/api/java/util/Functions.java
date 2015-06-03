@@ -77,7 +77,7 @@ public final class Functions
         return new Function<K, V>()
         {
             @Override
-            public final V apply(K key)
+            public final V apply(final K key)
             {
                 return map.get(key);
             }
@@ -91,7 +91,7 @@ public final class Functions
         return new Function<K, V>()
         {
             @Override
-            public final V apply(K key)
+            public final V apply(final K key)
             {
                 final V result = map.get(key);
 

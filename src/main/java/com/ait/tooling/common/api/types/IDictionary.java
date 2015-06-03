@@ -16,17 +16,21 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IDictionary
 {
     public int size();
 
+    public void clear();
+
     public boolean isEmpty();
+
+    public void remove(String name);
 
     public boolean isDefined(String name);
 
     public boolean isNull(String name);
 
-    public Collection<String> keys();
+    public List<String> keys();
 }

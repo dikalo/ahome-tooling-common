@@ -14,39 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.types;
+package com.ait.tooling.common.api.hash;
 
-import com.ait.tooling.common.api.types.IActivatable;
-
-public class Activatible implements IActivatable
+public interface IHash512
 {
-    private boolean m_active;
-
-    public Activatible()
-    {
-        this(false);
-    }
-
-    public Activatible(final boolean active)
-    {
-        m_active = active;
-    }
-
-    @Override
-    public boolean isActive()
-    {
-        return m_active;
-    }
-
-    @Override
-    public boolean setActive(final boolean active)
-    {
-        if (active != m_active)
-        {
-            m_active = active;
-
-            return true;
-        }
-        return false;
-    }
+    public String sha512(String text);
 }
