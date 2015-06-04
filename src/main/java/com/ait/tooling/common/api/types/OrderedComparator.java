@@ -16,12 +16,15 @@
 
 package com.ait.tooling.common.api.types;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class OrderedComparator<O extends Comparable<O>, T extends IOrdered<O>> implements Comparator<T>
+public class OrderedComparator<O extends Comparable<O>, T extends IOrdered<O>> implements Comparator<T>, Serializable
 {
+    private static final long serialVersionUID = 636952682383593298L;
+
     @Override
-    public int compare(T o1, T o2)
+    public int compare(final T o1, final T o2)
     {
         return o1.getOrder().compareTo(o2.getOrder());
     }

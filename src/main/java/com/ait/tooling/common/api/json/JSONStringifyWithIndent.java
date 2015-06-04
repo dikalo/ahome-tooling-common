@@ -14,23 +14,11 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.types;
+package com.ait.tooling.common.api.json;
 
-import java.util.List;
-
-public interface IDictionary
+public interface JSONStringifyWithIndent extends JSONStringify
 {
-    public int size();
+    public String toJSONString(int spaces);
 
-    public void clear();
-
-    public boolean isEmpty();
-
-    public boolean isDefined(String name);
-
-    public boolean isNull(String name);
-    
-    public Object remove(String name);
-
-    public List<String> keys();
+    public String toJSONString(String prefix);
 }

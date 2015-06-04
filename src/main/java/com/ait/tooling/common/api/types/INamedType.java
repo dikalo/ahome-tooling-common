@@ -16,21 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.util.List;
-
-public interface IDictionary
+public interface INamedType extends INamed
 {
-    public int size();
-
-    public void clear();
-
-    public boolean isEmpty();
-
-    public boolean isDefined(String name);
-
-    public boolean isNull(String name);
-    
-    public Object remove(String name);
-
-    public List<String> keys();
+    public void setName(String name);
 }

@@ -16,7 +16,17 @@
 
 package com.ait.tooling.common.api.types;
 
+import java.util.Collection;
+
 public interface ITypedDictionary<R> extends IDictionary
 {
     public R get(String name);
+
+    public R remove(String name);
+
+    public R put(String name, R value);
+
+    public void set(String name, R value);
+
+    public Collection<R> elements();
 }

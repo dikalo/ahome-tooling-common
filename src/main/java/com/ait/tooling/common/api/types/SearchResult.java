@@ -16,17 +16,21 @@
 
 package com.ait.tooling.common.api.types;
 
-public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>
+import java.io.Serializable;
+
+public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>, Serializable
 {
-    public final String m_id;
+    private static final long serialVersionUID = 2440955017561840921L;
 
-    public final String m_mime;
+    public final String       m_id;
 
-    public final String m_prop;
+    public final String       m_mime;
 
-    public final String m_desc;
+    public final String       m_prop;
 
-    public final T      m_valu;
+    public final String       m_desc;
+
+    public final T            m_valu;
 
     public SearchResult(final T valu, final String id, final String mime, final String prop, final String desc)
     {

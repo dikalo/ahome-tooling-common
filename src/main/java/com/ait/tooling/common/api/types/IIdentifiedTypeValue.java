@@ -16,7 +16,6 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface INamedDefinition extends INamed
+public interface IIdentifiedTypeValue<V> extends IIdentifiedType, IIdentifiedValue<V>
 {
-    public void setName(String name);
 }

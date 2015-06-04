@@ -14,23 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.types;
+package com.ait.tooling.common.api.json;
 
-import java.util.List;
-
-public interface IDictionary
+public interface JSONObjectValue<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends JSONStringify
 {
-    public int size();
-
-    public void clear();
-
-    public boolean isEmpty();
-
-    public boolean isDefined(String name);
-
-    public boolean isNull(String name);
-    
-    public Object remove(String name);
-
-    public List<String> keys();
+    public O getJSONObjectValue();
 }

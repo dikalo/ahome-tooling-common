@@ -32,7 +32,7 @@ import org.ajoberstar.grgit.Grgit
 
 sourceCompatibility = 1.7
 
-version = '1.0.31-SNAPSHOT'
+version = '1.0.32-SNAPSHOT'
 
 group = 'com.ahome-it'
 

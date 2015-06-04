@@ -14,23 +14,13 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.types;
+package com.ait.tooling.common.api.json;
 
-import java.util.List;
+import com.ait.tooling.common.api.types.IMixedListDefinition;
 
-public interface IDictionary
+public interface JSONArrayDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedListDefinition<L, O>, JSONStringify
 {
-    public int size();
+    public JSONType getJSONType(int index);
 
-    public void clear();
-
-    public boolean isEmpty();
-
-    public boolean isDefined(String name);
-
-    public boolean isNull(String name);
-    
-    public Object remove(String name);
-
-    public List<String> keys();
+    public boolean isJSONType(int index, JSONType type);
 }

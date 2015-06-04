@@ -14,15 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.types;
+package com.ait.tooling.common.api.json;
 
-import java.util.Collection;
-
-public interface ITypedStringHash<T> extends ITypedDictionary<T>
+public interface JSONObjectParser<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>, S>
 {
-    public void put(String name, T value);
-
-    public Collection<T> elements();
-
-    public void remove(String name);
+    public O parse(S source) throws Exception;
 }

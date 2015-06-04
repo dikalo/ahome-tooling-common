@@ -16,8 +16,8 @@
 
 package com.ait.tooling.common.api.model;
 
-import com.ait.tooling.common.api.types.ITypedStringHash;
+import com.ait.tooling.common.api.types.ITypedDictionary;
 
-public interface ITypedStringHashModel<R, T> extends IModel<R>, ITypedStringHash<T>
+public interface ITypedStringHashModel<R, T> extends IModel<R>, ITypedDictionary<T>
 {
 }
