@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.ait.tooling.common.server.util;
+package com.ait.tooling.common.server.io;
 
 import java.io.IOException;
 import java.io.Writer;
 
-import com.ait.tooling.common.api.java.util.function.Consumer;
-
-public class StringBuilderWriter extends Writer implements Consumer<String>
+public class NoSyncStringBuilderWriter extends Writer
 {
     private final static int    MINIMUM_CAPACITY = 16;
 
@@ -44,27 +42,21 @@ public class StringBuilderWriter extends Writer implements Consumer<String>
         return capacity + (capacity % MINIMUM_CAPACITY);
     }
 
-    public StringBuilderWriter()
+    public NoSyncStringBuilderWriter()
     {
         this(DEFAULT_CAPACITY);
     }
 
-    public StringBuilderWriter(final String str)
+    public NoSyncStringBuilderWriter(final String str)
     {
         this(Math.max(DEFAULT_CAPACITY, toMinimumCapacity(str.length())));
     }
 
-    public StringBuilderWriter(final int capacity)
+    public NoSyncStringBuilderWriter(final int capacity)
     {
         super(new StringBuilder(toMinimumCapacity(capacity)));
 
         m_buff = ((StringBuilder) super.lock);
-    }
-
-    @Override
-    public void accept(final String str)
-    {
-        m_buff.append(str);
     }
 
     @Override
@@ -100,7 +92,7 @@ public class StringBuilderWriter extends Writer implements Consumer<String>
     }
 
     @Override
-    public StringBuilderWriter append(final CharSequence chs)
+    public NoSyncStringBuilderWriter append(final CharSequence chs)
     {
         write((null == chs) ? "null" : chs.toString());
 
@@ -108,7 +100,7 @@ public class StringBuilderWriter extends Writer implements Consumer<String>
     }
 
     @Override
-    public StringBuilderWriter append(final CharSequence chs, final int beg, final int end)
+    public NoSyncStringBuilderWriter append(final CharSequence chs, final int beg, final int end)
     {
         final CharSequence csr = ((null == chs) ? "null" : chs);
 
@@ -118,7 +110,7 @@ public class StringBuilderWriter extends Writer implements Consumer<String>
     }
 
     @Override
-    public StringBuilderWriter append(final char c)
+    public NoSyncStringBuilderWriter append(final char c)
     {
         write(c);
 
@@ -141,7 +133,7 @@ public class StringBuilderWriter extends Writer implements Consumer<String>
     {
     }
 
-    public StringBuilderWriter clear()
+    public NoSyncStringBuilderWriter clear()
     {
         m_buff.setLength(0);
 
