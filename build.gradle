@@ -1,20 +1,18 @@
 /*
  Copyright (c) 2014,2015 Ahome' Innovation Technologies. All rights reserved.
-
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
+ http://www.apache.org/licenses/LICENSE-2.0
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.
-*/
+ */
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 buildscript {
     repositories {
@@ -32,7 +30,7 @@ import org.ajoberstar.grgit.Grgit
 
 sourceCompatibility = 1.7
 
-version = '1.0.33-SNAPSHOT'
+version = '1.0.33-RC0'
 
 group = 'com.ahome-it'
 
@@ -48,6 +46,16 @@ task('filterConfigs', dependsOn: deleteConfigs, type: Copy) {
     into 'build/resources/main'
     filter(FixCrLfFilter)
     filter(ReplaceTokens, tokens: getFilterTokens())
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 compileJava.dependsOn(clean)
@@ -142,12 +150,48 @@ sourceSets {
     }
 }
 
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives jar
+}
+
+signing {
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
-            repository(url: "${sonatype_snapshotURL}") {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: "${sonatype_user}", password: "${sonatype_password}")
+            }
+            pom.project {
+                name 'Ahome-Tooling-Common'
+                packaging 'jar'
+                description 'Ahome-Tooling-Common is common integfaces and utility classes for Ahome Tooling Projects'
+                url 'https://github.com/ahome-it/ahome-tooling-common'
+                scm {
+                    url 'scm:git@github.com:ahome-it/ahome-tooling-common.git'
+                    connection 'scm:git@github.com:ahome-it/ahome-tooling-common.git'
+                    developerConnection 'scm:git@github.com:ahome-it/ahome-tooling-common.git'
+                }
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'SprocketNYC'
+                        name 'Dean Jones'
+                    }
+                }
             }
         }
     }
 }
+
