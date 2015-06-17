@@ -24,6 +24,16 @@ SNAPSHOT:
 </dependency>
 ```
 
+RELEASE:
+
+The RC and RELEASE versions will be found in Maven Central
+
+```xml
+<dependency>
+  <groupId>com.ahome-it</groupId>
+  <artifactId>ahome-tooling-common</artifactId>
+  <version>1.0.33-RC1</version>
+</dependency>```
 License
 
 Ahome Tooling Common is released under version 2.0 of the Apache License.
