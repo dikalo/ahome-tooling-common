@@ -32,7 +32,7 @@ The RC and RELEASE versions will be found in Maven Central
 <dependency>
   <groupId>com.ahome-it</groupId>
   <artifactId>ahome-tooling-common</artifactId>
-  <version>1.0.33-RC1</version>
+  <version>1.0.33-RELEASE</version>
 </dependency>
 ```
 

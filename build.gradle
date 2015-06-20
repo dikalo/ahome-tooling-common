@@ -34,7 +34,7 @@ import org.ajoberstar.grgit.Grgit
 
 sourceCompatibility = 1.7
 
-version = '1.0.33-RC1'
+version = '1.0.33-RELEASE'
 
 group = 'com.ahome-it'
 
