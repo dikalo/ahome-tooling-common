@@ -16,8 +16,10 @@
 
 package com.ait.tooling.common.api.model;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.types.IMixedStringHash;
 
-public interface IMixedStringHashModel<R> extends IModel<R>, IMixedStringHash
+public interface IMixedStringHashModel<R> extends IModel<R>, IMixedStringHash, Serializable
 {
 }

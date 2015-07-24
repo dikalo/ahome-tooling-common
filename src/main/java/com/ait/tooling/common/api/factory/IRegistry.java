@@ -16,9 +16,11 @@
 
 package com.ait.tooling.common.api.factory;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.types.ITypedDictionary;
 
-public interface IRegistry<R> extends ITypedDictionary<R>
+public interface IRegistry<R> extends ITypedDictionary<R>, Serializable
 {
     public boolean isModifiable();
 }

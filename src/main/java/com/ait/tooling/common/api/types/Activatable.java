@@ -16,11 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-import com.ait.tooling.common.api.types.IActivatable;
-
-public class Activatable implements IActivatable, Serializable
+public class Activatable implements IActivatable
 {
     private static final long serialVersionUID = -7816996046350441349L;
 

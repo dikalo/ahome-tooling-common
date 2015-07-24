@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IMixedStringHashDefinition<L extends IMixedListDefinition<L, O>, O extends IMixedStringHashDefinition<L, O>> extends IMixedStringHash
+import java.io.Serializable;
+
+public interface IMixedStringHashDefinition<L extends IMixedListDefinition<L, O>, O extends IMixedStringHashDefinition<L, O>> extends IMixedStringHash, Serializable
 {
     public L getAsArray(String name);
 

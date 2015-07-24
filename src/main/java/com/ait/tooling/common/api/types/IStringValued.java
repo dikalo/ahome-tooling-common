@@ -16,6 +16,8 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IStringValued extends IValued<String>
+import java.io.Serializable;
+
+public interface IStringValued extends IValued<String>, Serializable
 {
 }

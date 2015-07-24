@@ -16,9 +16,11 @@
 
 package com.ait.tooling.common.api.factory;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.java.util.function.Consumer;
 
-public interface IAsyncRegistryResult<T> extends Consumer<T>
+public interface IAsyncRegistryResult<T> extends Consumer<T>, Serializable
 {
     public void onFailure(Throwable caught);
 }

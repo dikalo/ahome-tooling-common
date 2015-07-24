@@ -16,12 +16,12 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.util.Collection;
+import java.io.Serializable;
 
 import com.ait.tooling.common.api.java.util.function.Consumer;
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public interface ISearchable<T extends ISearchable<T>>
+public interface ISearchable<T extends ISearchable<T>> extends Comparable<T>, Serializable
 {
-    public void searchFor(Predicate<T> predicate, Consumer<Collection<ISearchResult<T>>> results);
+    public void searchFor(Predicate<T> predicate, Consumer<ISearchResult<T>> callback);
 }

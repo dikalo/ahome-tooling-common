@@ -16,6 +16,7 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
@@ -23,9 +24,11 @@ import java.util.Objects;
 import com.ait.tooling.common.api.java.util.function.Consumer;
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Filters
+public final class Filters implements Serializable
 {
-    private Filters()
+    private static final long serialVersionUID = 9205775152924964417L;
+
+    protected Filters()
     {
     }
 

@@ -16,9 +16,10 @@
 
 package com.ait.tooling.common.api.types;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IDictionary
+public interface IDictionary extends Serializable
 {
     public int size();
 
@@ -29,7 +30,7 @@ public interface IDictionary
     public boolean isDefined(String name);
 
     public boolean isNull(String name);
-    
+
     public Object remove(String name);
 
     public List<String> keys();

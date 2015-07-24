@@ -17,38 +17,39 @@
 package com.ait.tooling.common.api.types;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>, Serializable
 {
     private static final long serialVersionUID = 2440955017561840921L;
 
-    public final String       m_id;
+    private final String      m_iden;
 
-    public final String       m_mime;
+    private final String      m_mime;
 
-    public final String       m_prop;
+    private final String      m_prop;
 
-    public final String       m_desc;
+    private final String      m_desc;
 
-    public final T            m_valu;
+    private final T           m_valu;
 
-    public SearchResult(final T valu, final String id, final String mime, final String prop, final String desc)
+    public SearchResult(final T valu, final String iden, final String mime, final String prop, final String desc)
     {
-        m_id = id;
+        m_valu = Objects.requireNonNull(valu);
 
-        m_mime = mime;
+        m_iden = Objects.requireNonNull(iden);
 
-        m_prop = prop;
+        m_mime = Objects.requireNonNull(mime);
 
-        m_valu = valu;
+        m_prop = Objects.requireNonNull(prop);
 
-        m_desc = desc;
+        m_desc = Objects.requireNonNull(desc);
     }
 
     @Override
     public String getID()
     {
-        return m_id;
+        return m_iden;
     }
 
     @Override
@@ -73,5 +74,11 @@ public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>,
     public String getDescription()
     {
         return m_desc;
+    }
+
+    @Override
+    public int compareTo(final T other)
+    {
+        return getValue().compareTo(other);
     }
 }

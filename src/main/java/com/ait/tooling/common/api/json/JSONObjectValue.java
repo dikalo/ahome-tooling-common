@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.json;
 
-public interface JSONObjectValue<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends JSONStringify
+import java.io.Serializable;
+
+public interface JSONObjectValue<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends JSONStringify, Serializable
 {
     public O getJSONObjectValue();
 }

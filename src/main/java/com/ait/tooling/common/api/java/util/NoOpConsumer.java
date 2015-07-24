@@ -16,10 +16,14 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.java.util.function.Consumer;
 
-public final class NoOpConsumer<T> implements Consumer<T>
+public final class NoOpConsumer<T> implements Consumer<T>, Serializable
 {
+    private static final long serialVersionUID = 604862338194983601L;
+
     @Override
     public void accept(T value)
     {

@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IValued<T>
+import java.io.Serializable;
+
+public interface IValued<T> extends Serializable
 {
     public T getValue();
 }

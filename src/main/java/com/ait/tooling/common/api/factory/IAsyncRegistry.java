@@ -16,9 +16,11 @@
 
 package com.ait.tooling.common.api.factory;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.types.IDictionary;
 
-public interface IAsyncRegistry<T> extends IDictionary
+public interface IAsyncRegistry<T> extends IDictionary, Serializable
 {
     public boolean isModifiable();
 }

@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface ISearchResult<T extends ISearchable<T>> extends IIdentifiedValue<T>
+import java.io.Serializable;
+
+public interface ISearchResult<T extends ISearchable<T>> extends IIdentifiedValue<T>, Comparable<T>, Serializable
 {
     public String getMimeType();
 

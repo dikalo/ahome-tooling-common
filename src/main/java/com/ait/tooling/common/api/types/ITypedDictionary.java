@@ -16,9 +16,10 @@
 
 package com.ait.tooling.common.api.types;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public interface ITypedDictionary<R> extends IDictionary
+public interface ITypedDictionary<R> extends IDictionary, Serializable
 {
     public R get(String name);
 

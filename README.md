@@ -1,42 +1,33 @@
 Ahome Tooling Common
 ======
 
-Ahome Tooling Common is a package containing often used interfaces and utility classes that can work both on the server side and with GWT. All classes have to be GWT compatible.
+Ahome Tooling Common is a package containing often used interfaces and utility classes that can work both on the server side and with GWT. All classes in the com.ait.tooling.common.api.* must be GWT compatible, although this project does NOT depend on GWT in any way.
 
 https://github.com/ahome-it/ahome-tooling-common
 
 Downloading artifacts
 
-SNAPSHOT:
-
-```xml
-<repositories>
-  <repository>
-  <id>sonatype</id>
-  <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-  </repository>
-</repositories>
-
-<dependency>
-  <groupId>com.ahome-it</groupId>
-  <artifactId>ahome-tooling-common</artifactId>
-  <version>1.0.33-SNAPSHOT</version>
-</dependency>
-```
-
 RELEASE:
 
-The RC and RELEASE versions will be found in Maven Central
-
+Maven:
 ```xml
 <dependency>
   <groupId>com.ahome-it</groupId>
   <artifactId>ahome-tooling-common</artifactId>
-  <version>1.0.33-RELEASE</version>
+  <version>1.0.34-RELEASE</version>
 </dependency>
 ```
+Gradle:
+```
+dependencies {
+    compile(group:'com.ahome-it',name:'ahome-tooling-common',version:'1.0.34-RELEASE')
+}
+```
+Javadoc URL:
 
-License
+http://lienzo-core.com/documents/javadoc/ahome-tooling-common
+
+License:
 
 Ahome Tooling Common is released under version 2.0 of the Apache License.
 

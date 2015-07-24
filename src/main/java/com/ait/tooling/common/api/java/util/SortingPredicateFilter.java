@@ -16,6 +16,7 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,8 +25,10 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class SortingPredicateFilter<T> implements IFilter<T>
+public final class SortingPredicateFilter<T> implements IFilter<T>, Serializable
 {
+    private static final long   serialVersionUID = -2866190837328905732L;
+
     private final Predicate<T>  m_predicate;
 
     private final Comparator<T> m_compareit;

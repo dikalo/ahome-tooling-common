@@ -14,12 +14,13 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.model;
+package com.ait.tooling.common.api.types;
 
 import java.io.Serializable;
 
-import com.ait.tooling.common.api.types.ITypedList;
-
-public interface ITypedListModel<R, T> extends IModel<R>, ITypedList<T>, Serializable
+public interface IPropertyResolver extends Serializable
 {
+    public String getPropertyByName(String name);
+
+    public String getPropertyByName(String name, String otherwise);
 }

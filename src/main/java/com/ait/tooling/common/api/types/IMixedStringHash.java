@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IMixedStringHash extends IDictionary
+import java.io.Serializable;
+
+public interface IMixedStringHash extends IDictionary, Serializable
 {
     public boolean isArray(String name);
 

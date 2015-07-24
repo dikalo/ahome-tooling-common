@@ -16,11 +16,15 @@
 
 package com.ait.tooling.common.api.java.util;
 
-public final class UUID
+import java.io.Serializable;
+
+public final class UUID implements Serializable
 {
+    private static final long serialVersionUID = 237905255952564761L;
+    
     private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
-    private UUID()
+    protected UUID()
     {
     }
 

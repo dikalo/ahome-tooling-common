@@ -16,8 +16,10 @@
 
 package com.ait.tooling.common.api.model;
 
+import java.io.Serializable;
+
 import com.ait.tooling.common.api.types.ITypedDictionary;
 
-public interface ITypedStringHashModel<R, T> extends IModel<R>, ITypedDictionary<T>
+public interface ITypedStringHashModel<R, T> extends IModel<R>, ITypedDictionary<T>, Serializable
 {
 }

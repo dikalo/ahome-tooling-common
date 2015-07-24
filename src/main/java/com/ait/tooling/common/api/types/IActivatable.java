@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IActivatable
+import java.io.Serializable;
+
+public interface IActivatable extends Serializable
 {
     public boolean isActive();
 

@@ -16,15 +16,18 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Function;
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Functions
+public final class Functions implements Serializable
 {
-    private Functions()
+    private static final long serialVersionUID = -3629408146609381550L;
+
+    protected Functions()
     {
     }
 
@@ -43,9 +46,9 @@ public final class Functions
     public static final <V, T, R> Function<V, R> compose(final Function<? super V, ? extends T> before, final Function<? super T, ? extends R> after)
     {
         Objects.requireNonNull(after);
-        
+
         Objects.requireNonNull(before);
-        
+
         return new Function<V, R>()
         {
             @Override
@@ -73,7 +76,7 @@ public final class Functions
     public static final <K, V> Function<K, V> forMap(final Map<K, V> map)
     {
         Objects.requireNonNull(map);
-        
+
         return new Function<K, V>()
         {
             @Override

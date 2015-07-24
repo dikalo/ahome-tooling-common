@@ -16,15 +16,18 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Predicates
+public final class Predicates implements Serializable
 {
-    private Predicates()
+    private static final long serialVersionUID = 5253333459696388521L;
+
+    protected Predicates()
     {
     }
 

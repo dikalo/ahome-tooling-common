@@ -16,17 +16,24 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
-public final class StringOps
+public final class StringOps implements Serializable
 {
-    public final static String[] EMPTY = new String[0];
+    private static final long    serialVersionUID   = 8903014888710045180L;
 
-    public final static String   NULL  = null;
+    private static final String  SEPR               = ", ";
 
-    private StringOps()
+    public static final String   NULL_STRING        = null;
+
+    public static final String   EMPTY_STRING       = "";
+
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    protected StringOps()
     {
     }
 
@@ -36,16 +43,16 @@ public final class StringOps
 
         if (collection.isEmpty())
         {
-            return EMPTY;
+            return EMPTY_STRING_ARRAY;
         }
-        return collection.toArray(EMPTY);
+        return collection.toArray(EMPTY_STRING_ARRAY);
     }
 
     public static final String[] toArray(final String... collection)
     {
         if ((null == collection) || (collection.length < 1))
         {
-            return EMPTY;
+            return EMPTY_STRING_ARRAY;
         }
         return collection;
     }
@@ -56,7 +63,7 @@ public final class StringOps
 
         if (collection.isEmpty())
         {
-            return EMPTY;
+            return EMPTY_STRING_ARRAY;
         }
         final LinkedHashSet<String> uniq = new LinkedHashSet<String>();
 
@@ -74,7 +81,7 @@ public final class StringOps
     {
         if ((null == collection) || (collection.length < 1))
         {
-            return EMPTY;
+            return EMPTY_STRING_ARRAY;
         }
         final LinkedHashSet<String> uniq = new LinkedHashSet<String>();
 
@@ -110,6 +117,58 @@ public final class StringOps
         return uniq;
     }
 
+    public static final String toPrintableString(final Collection<String> collection)
+    {
+        if (null == collection)
+        {
+            return "null";
+        }
+        if (collection.isEmpty())
+        {
+            return "[]";
+        }
+        return toPrintableString(toArray(collection));
+    }
+
+    public static final String toPrintableString(final String... list)
+    {
+        if (null == list)
+        {
+            return "null";
+        }
+        if (list.length == 0)
+        {
+            return "[]";
+        }
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append('[');
+
+        for (String item : list)
+        {
+            if (null != item)
+            {
+                builder.append('"').append(item).append('"');
+            }
+            else
+            {
+                builder.append("null");
+            }
+            builder.append(SEPR);
+        }
+        final int sepr = SEPR.length();
+
+        final int leng = builder.length();
+
+        final int tail = builder.lastIndexOf(SEPR);
+
+        if ((tail >= 0) && (tail == (leng - sepr)))
+        {
+            builder.setLength(leng - sepr);
+        }
+        return builder.append(']').toString();
+    }
+
     public static final String toTrimOrNull(String string)
     {
         if (null == string)
@@ -133,7 +192,29 @@ public final class StringOps
         return Objects.requireNonNull(toTrimOrNull(string), Objects.requireNonNull(reason));
     }
 
-    public static final boolean isAlphabetic(final String string)
+    public static final boolean isDigits(final String string)
+    {
+        if (null == string)
+        {
+            return false;
+        }
+        final int leng = string.length();
+
+        if (leng < 1)
+        {
+            return false;
+        }
+        for (int i = 0; i < leng; i++)
+        {
+            if (false == Character.isDigit(string.charAt(i)))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static final boolean isAlpha(final String string)
     {
         if (null == string)
         {
@@ -155,7 +236,7 @@ public final class StringOps
         return true;
     }
 
-    public static final boolean isAlphanumeric(final String string)
+    public static final boolean isAlphaOrDigits(final String string)
     {
         if (null == string)
         {
@@ -177,7 +258,7 @@ public final class StringOps
         return true;
     }
 
-    public static final boolean isAlphanumericStartsAlphabetic(final String string)
+    public static final boolean isAlphaOrDigitsStartsAlpha(final String string)
     {
         if (null == string)
         {
@@ -259,5 +340,90 @@ public final class StringOps
             return string;
         }
         return new StringBuilder(string).reverse().toString();
+    }
+
+    public static final String escapeForJavaScript(final String string)
+    {
+        if (null == string)
+        {
+            return "null";
+        }
+        if (string.isEmpty())
+        {
+            return string;
+        }
+        return escapeForJavaScript(string, new StringBuilder()).toString();
+    }
+
+    public static final StringBuilder escapeForJavaScript(final String string, final StringBuilder builder)
+    {
+        if (null == string)
+        {
+            return builder.append("null");
+        }
+        final int leng = string.length();
+
+        for (int i = 0; i < leng; i++)
+        {
+            final char c = string.charAt(i);
+
+            if (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || (c == ' ') || ((c >= '0') && (c <= '9')))
+            {
+                builder.append(c);// ASCII will be most common, this improves write speed about 5%, FWIW.
+            }
+            else
+            {
+                switch (c)
+                {
+                    case '"':
+                        builder.append("\\\"");
+                        break;
+                    case '\\':
+                        builder.append("\\\\");
+                        break;
+                    case '\b':
+                        builder.append("\\b");
+                        break;
+                    case '\f':
+                        builder.append("\\f");
+                        break;
+                    case '\n':
+                        builder.append("\\n");
+                        break;
+                    case '\r':
+                        builder.append("\\r");
+                        break;
+                    case '\t':
+                        builder.append("\\t");
+                        break;
+                    case '/':
+                        builder.append("\\/");
+                        break;
+                    default:
+                        // Reference: http://www.unicode.org/versions/Unicode5.1.0/
+
+                        if (((c >= '\u0000') && (c <= '\u001F')) || ((c >= '\u007F') && (c <= '\u009F')) || ((c >= '\u2000') && (c <= '\u20FF')))
+                        {
+                            final String unic = Integer.toHexString(c);
+
+                            final int size = 4 - unic.length();
+
+                            builder.append("\\u");
+
+                            for (int k = 0; k < size; k++)
+                            {
+                                builder.append('0');
+                            }
+                            builder.append(unic.toUpperCase());
+                        }
+                        else
+                        {
+                            builder.append(c);
+                        }
+                        break;
+                }
+            }
+        }
+        return builder;
     }
 }

@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.json;
 
-public interface JSONObjectParser<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>, S>
+import java.io.Serializable;
+
+public interface JSONObjectParser<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>, S> extends Serializable
 {
     public O parse(S source) throws Exception;
 }

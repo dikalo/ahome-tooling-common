@@ -16,6 +16,8 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface INamedValue<V> extends INamed, IValued<V>
+import java.io.Serializable;
+
+public interface INamedValue<V> extends INamed, IValued<V>, Serializable
 {
 }

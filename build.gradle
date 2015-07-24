@@ -34,9 +34,23 @@ import org.ajoberstar.grgit.Grgit
 
 sourceCompatibility = 1.7
 
-version = '1.0.33-RELEASE'
+targetCompatibility = 1.7
+
+version = '1.0.34-RELEASE'
 
 group = 'com.ahome-it'
+
+def getProjectArtifactID() {
+    'ahome-tooling-common'
+}
+
+def getProjectTitle() {
+    'Ahome-Tooling-Common'
+}
+
+def getProjectCommonName() {
+    'Ahome Tooling Common'
+}
 
 task('deleteConfigs', type: Delete) {
     FileTree tree = fileTree (dir: 'build/resources/main');
@@ -55,7 +69,7 @@ task('filterConfigs', dependsOn: deleteConfigs, type: Copy) {
 task doJavaDocs(type: Javadoc) {
     source = sourceSets.main.allJava
     failOnError = false
-    title = 'Ahome Tooling Common - Common interfaces and utility classes for Ahome Tooling projects.'
+    title = "${getProjectCommonName()} ${getBuildModuleVersion()} - Interfaces and utility classes for Ahome Tooling projects."
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -82,14 +96,6 @@ def getFilterTokens() {
     [GRADLE_BUILD_ARTIFACT_ID: getProjectArtifactID(), GRADLE_BUILD_PROJECT_TITLE: getProjectTitle(), GRADLE_BUILD_USER: getBuildUser(), GRADLE_BUILD_DATE: getBuildDate(), GRADLE_JAVA_VERSION: getJavaVersion(), GRADLE_GIT_COMMIT_HASH: getBuildGITCommitHash(), GRADLE_GIT_COMMIT_USER: getBuildGITCommitUser(), GRADLE_GIT_COMMIT_MESSAGE: getBuildGITCommitMessage(), GRADLE_BUILD_SERVER_HOST: getBuildServerHost(), GRADLE_BUILD_SERVER_BUILD: getBuildServerBuild(), GRADLE_BUILD_MODULE_VERSION: getBuildModuleVersion()]
 }
 
-def getProjectArtifactID() {
-    'ahome-tooling-common'
-}
-
-def getProjectTitle() {
-    'Ahome-Tooling-Common'
-}
-
 def getBuildModuleVersion() {
     version
 }
@@ -105,12 +111,12 @@ def getBuildServerHost() {
     }
     catch (Exception e)
     {
-        "localhost"
+        'localhost'
     }
 }
 
 def getJavaVersion() {
-    String java = System.getProperty('java.version')
+    def java = System.getProperty('java.version')
     if (java)
     {
         return java
@@ -119,7 +125,7 @@ def getJavaVersion() {
 }
 
 def getBuildUser() {
-    String user = System.getProperty('user.name')
+    def user = System.getProperty('user.name')
     if (user)
     {
         return user
@@ -128,7 +134,7 @@ def getBuildUser() {
 }
 
 def getBuildServerBuild() {
-    String name = System.getProperty('BUILD_DISPLAY_NAME')
+    def name = System.getProperty('BUILD_DISPLAY_NAME')
     if (name)
     {
         return name
@@ -174,13 +180,13 @@ uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            repository(url: "${sonatype_staging_URL}") {
                 authentication(userName: "${sonatype_user}", password: "${sonatype_password}")
             }
             pom.project {
                 name 'Ahome-Tooling-Common'
                 packaging 'jar'
-                description 'Ahome-Tooling-Common is common integfaces and utility classes for Ahome Tooling Projects'
+                description 'Ahome-Tooling-Common is common integfaces and utility classes for Ahome Tooling Projects.'
                 url 'https://github.com/ahome-it/ahome-tooling-common'
                 scm {
                     url 'scm:git@github.com:ahome-it/ahome-tooling-common.git'

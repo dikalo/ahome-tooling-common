@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IMixedList
+import java.io.Serializable;
+
+public interface IMixedList extends Serializable
 {
     public void clear();
 

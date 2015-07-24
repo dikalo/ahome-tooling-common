@@ -23,9 +23,11 @@ import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Flows
+public final class Flows implements Serializable
 {
-    private Flows()
+    private static final long serialVersionUID = 3013490177528306662L;
+
+    protected Flows()
     {
     }
 

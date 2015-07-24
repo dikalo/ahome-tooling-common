@@ -16,7 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-public interface IOrdered<O extends Comparable<O>>
+import java.io.Serializable;
+
+public interface IOrdered<O extends Comparable<O>> extends Serializable
 {
     public O getOrder();
 
