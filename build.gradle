@@ -36,7 +36,7 @@ sourceCompatibility = 1.7
 
 targetCompatibility = 1.7
 
-version = '1.0.34-RELEASE'
+version = '1.0.35-RELEASE'
 
 group = 'com.ahome-it'
 
@@ -67,7 +67,7 @@ task('filterConfigs', dependsOn: deleteConfigs, type: Copy) {
 }
 
 task doJavaDocs(type: Javadoc) {
-    source = sourceSets.main.allJava
+    source = sourceSets.main.allSource
     failOnError = false
     title = "${getProjectCommonName()} ${getBuildModuleVersion()} - Interfaces and utility classes for Ahome Tooling projects."
 }
@@ -116,30 +116,15 @@ def getBuildServerHost() {
 }
 
 def getJavaVersion() {
-    def java = System.getProperty('java.version')
-    if (java)
-    {
-        return java
-    }
-    'unknown'
+    System.getProperty('java.version') ?: 'unknown'
 }
 
 def getBuildUser() {
-    def user = System.getProperty('user.name')
-    if (user)
-    {
-        return user
-    }
-    'unknown'
+    System.getProperty('user.name') ?: 'unknown'
 }
 
 def getBuildServerBuild() {
-    def name = System.getProperty('BUILD_DISPLAY_NAME')
-    if (name)
-    {
-        return name
-    }
-    'Command line ' + GradleVersion.current().toString()
+    System.getProperty('BUILD_DISPLAY_NAME') ?: 'Command line ' + GradleVersion.current().toString()
 }
 
 def getBuildGITCommitHash() {
