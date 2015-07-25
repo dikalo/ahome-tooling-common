@@ -36,7 +36,7 @@ sourceCompatibility = 1.7
 
 targetCompatibility = 1.7
 
-version = '1.0.35-RELEASE'
+version = '1.0.45-RELEASE'
 
 group = 'com.ahome-it'
 
@@ -67,7 +67,7 @@ task('filterConfigs', dependsOn: deleteConfigs, type: Copy) {
 }
 
 task doJavaDocs(type: Javadoc) {
-    source = sourceSets.main.allSource
+    source = sourceSets.main.allJava
     failOnError = false
     title = "${getProjectCommonName()} ${getBuildModuleVersion()} - Interfaces and utility classes for Ahome Tooling projects."
 }
