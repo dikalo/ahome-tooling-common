@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'signing'
-
 buildscript {
     repositories {
         mavenCentral()
@@ -26,7 +22,9 @@ buildscript {
         classpath(group: 'org.ajoberstar', name: 'grgit', version: '1.4.0')
         classpath(group: 'commons-codec', name: 'commons-codec', version: '1.10')
         classpath(group: 'commons-logging', name: 'commons-logging', version: '1.2')
-        classpath(group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5')
+        classpath(group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.1')
+        classpath(group: 'org.fusesource.jansi', name: 'jansi', version: '1.11')
+        classpath(group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.5')
     }
 }
 
@@ -34,6 +32,14 @@ import org.apache.tools.ant.filters.FixCrLfFilter
 import org.apache.tools.ant.filters.ReplaceTokens
 import java.net.InetAddress
 import org.ajoberstar.grgit.Grgit
+
+apply plugin: 'maven'
+apply plugin: 'groovy'
+apply plugin: 'jacoco'
+apply plugin: 'signing'
+apply plugin: 'eclipse'
+
+compileJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = 1.7
 
@@ -69,10 +75,16 @@ task('filterConfigs', dependsOn: deleteConfigs, type: Copy) {
     filter(ReplaceTokens, tokens: getFilterTokens())
 }
 
-task doJavaDocs(type: Javadoc) {
-    source = sourceSets.main.allJava
-    failOnError = false
-    title = "${getProjectCommonName()} ${getBuildModuleVersion()} - Interfaces and utility classes for Ahome Tooling projects."
+task doJavaDocs(type: Groovydoc) {
+    source = sourceSets.main.allSource
+    classpath = sourceSets.main.runtimeClasspath + buildscript.configurations.classpath
+    destinationDir = file("${buildDir}/docs/javadoc")
+    includes = ['com/ait/tooling/**']
+    docTitle = "Ahome Tooling Common"
+    footer = "<small><a href=\"https://github.com/ahome-it/ahome-tooling-common\" target=\"_blank\">Ahome Tooling Common - ${version} - Author: Dean S. Jones</a></small>"
+    getGroovydocLinks().each { name, list ->
+        link(name, *list)
+    }
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -82,7 +94,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 task javadocJar(type: Jar, dependsOn: doJavaDocs) {
     classifier = 'javadoc'
-    from javadoc.destinationDir
+    from "${buildDir}/docs/javadoc"
 }
 
 compileJava.dependsOn(clean)
@@ -199,4 +211,41 @@ uploadArchives {
             }
         }
     }
+}
+
+def Map<String, List<String>> getGroovydocLinks() {
+    def lmap = [:]
+    File data = file('groovydoc/GROOVYDOC_LINK_LISTS.txt')
+    if (data.exists()) {
+        data.eachLine { line ->
+            def vals = ((CharSequence) line).tokenize(',')
+            lmap[vals.head()] = vals.tail()
+        }
+    }
+    lmap
+}
+
+task(buildGroovydocLinks) << {
+    def site = [:]
+    File data = file('groovydoc/GROOVYDOC_LINK_SITES.txt')
+    if (data.exists()) {
+        data.eachLine { line ->
+            site[line] = ((CharSequence) new URL("${line}/package-list").text).tokenize('\n')
+        }
+    }
+    File make = file('groovydoc/GROOVYDOC_LINK_LISTS.txt')
+    if(make.exists()) {
+        make.delete()
+    }
+    make.createNewFile()
+    def save = make.newPrintWriter()
+    site.each { link, list ->
+        def show = "${link}"
+        list.each { line ->
+            show = "${show},${line}"
+        }
+        save.println("${show}")
+    }
+    save.flush()
+    save.close()
 }
