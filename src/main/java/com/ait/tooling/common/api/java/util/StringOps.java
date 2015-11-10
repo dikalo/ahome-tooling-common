@@ -182,6 +182,17 @@ public final class StringOps implements Serializable
         return string;
     }
 
+    public static final String toTrimOrElse(String string, String otherwise)
+    {
+        string = toTrimOrNull(string);
+
+        if (null == string)
+        {
+            return otherwise;
+        }
+        return string;
+    }
+
     public static final String requireTrimOrNull(final String string)
     {
         return Objects.requireNonNull(toTrimOrNull(string));

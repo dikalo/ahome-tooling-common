@@ -91,4 +91,26 @@ public interface IHTTPConstants
     public static final String X_SCHEMA_VERSION_HEADER          = "X-Schema-Version";
 
     public static final String X_XSRF_TOKEN_HEADER              = "X-Request-XSRFToken";
+
+    public static final String X_CLIENT_API_TOKEN_HEADER        = "X-Client-API-Token";
+
+    public static final String X_STRICT_JSON_FORMAT_HEADER      = "X-Strict-JSON-Format";
+
+    public static final String CACHE_CONTROL_MAX_AGE_PREFIX     = "max-age=";
+
+    public static final String NO_CACHE_PRAGMA_HEADER_VALUE     = "no-cache";
+
+    public static final String NO_CACHE_CONTROL_HEADER_VALUE    = "no-cache, no-store, must-revalidate";
+
+    public static final long   DAY_IN_SECONDS                   = 86400L;
+
+    public static final long   DAY_IN_MILLISECONDS              = 86400000L;
+
+    public static final long   WEEK_IN_SECONDS                  = 604800L;
+
+    public static final long   WEEK_IN_MILLISECONDS             = 604800000L;
+
+    public static final long   YEAR_IN_SECONDS                  = 31536000L;
+
+    public static final long   YEAR_IN_MILLISECONDS             = 31536000000L;
 }
