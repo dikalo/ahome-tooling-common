@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014,2015 Ahome' Innovation Technologies. All rights reserved.
+   Copyright (c) 2014,2015,2016 Ahome' Innovation Technologies. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,8 +18,12 @@ package com.ait.tooling.common.api.types;
 
 import java.io.Serializable;
 
-public interface ISearchResult<T extends ISearchable<T>> extends IIdentifiedValue<T>, Comparable<T>, Serializable
+public interface ISearchResult<T extends Comparable<T>> extends IIdentifiedValue<T>, Comparable<T>, Serializable
 {
+    public long getTime();
+
+    public String getPath();
+
     public String getMimeType();
 
     public String getProperty();

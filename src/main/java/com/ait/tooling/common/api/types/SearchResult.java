@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014,2015 Ahome' Innovation Technologies. All rights reserved.
+   Copyright (c) 2014,2015,2016 Ahome' Innovation Technologies. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -19,9 +19,13 @@ package com.ait.tooling.common.api.types;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>, Serializable
+public class SearchResult<T extends Comparable<T>> implements ISearchResult<T>, Serializable
 {
     private static final long serialVersionUID = 2440955017561840921L;
+
+    private final T           m_valu;
+
+    private final long        m_time;
 
     private final String      m_iden;
 
@@ -31,9 +35,9 @@ public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>,
 
     private final String      m_desc;
 
-    private final T           m_valu;
+    private final String      m_path;
 
-    public SearchResult(final T valu, final String iden, final String mime, final String prop, final String desc)
+    public SearchResult(final T valu, final String iden, final String mime, final String prop, final String desc, final String path, final long time)
     {
         m_valu = Objects.requireNonNull(valu);
 
@@ -44,12 +48,28 @@ public class SearchResult<T extends ISearchable<T>> implements ISearchResult<T>,
         m_prop = Objects.requireNonNull(prop);
 
         m_desc = Objects.requireNonNull(desc);
+
+        m_path = Objects.requireNonNull(path);
+
+        m_time = time;
     }
 
     @Override
-    public String getID()
+    public String getId()
     {
         return m_iden;
+    }
+
+    @Override
+    public long getTime()
+    {
+        return m_time;
+    }
+
+    @Override
+    public String getPath()
+    {
+        return m_path;
     }
 
     @Override

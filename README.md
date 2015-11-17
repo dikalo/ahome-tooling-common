@@ -14,18 +14,18 @@ Maven:
 <dependency>
   <groupId>com.ahome-it</groupId>
   <artifactId>ahome-tooling-common</artifactId>
-  <version>1.0.75-RELEASE</version>
+  <version>1.0.80-RELEASE</version>
 </dependency>
 ```
 Gradle:
 ```
 dependencies {
-    compile(group:'com.ahome-it',name:'ahome-tooling-common',version:'1.0.75-RELEASE')
+    compile(group:'com.ahome-it',name:'ahome-tooling-common',version:'1.0.80-RELEASE')
 }
 ```
 Javadoc URL:
 
-http://lienzo-core.com/documents/javadoc/ahome-tooling-common
+https://lienzo-core.com/documents/javadoc/ahome-tooling-common
 
 License:
 
