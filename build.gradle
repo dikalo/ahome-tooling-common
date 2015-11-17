@@ -45,7 +45,7 @@ sourceCompatibility = 1.7
 
 targetCompatibility = 1.7
 
-version = '1.0.80-RELEASE'
+version = '1.0.85-RELEASE'
 
 group = 'com.ahome-it'
 
@@ -69,7 +69,7 @@ task deleteConfigs(type: Delete) {
 }
 
 task filterConfigs(dependsOn: deleteConfigs, type: Copy) {
-    from sourceSets.main.resources
+    from sourceSets.main.allSource
     into "${buildDir}/resources/main"
     filter(FixCrLfFilter)
     filter(ReplaceTokens, tokens: getFilterTokens())
