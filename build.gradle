@@ -61,7 +61,7 @@ def String getProjectCommonName() {
     'Ahome Tooling Common'
 }
 
-ttask deleteConfigs(type: Delete) {
+task deleteConfigs(type: Delete) {
     FileTree tree = fileTree(dir: "${buildDir}/resources/main")
     tree.each { File file ->
         delete(file)
