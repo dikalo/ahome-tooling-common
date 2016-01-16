@@ -29,6 +29,8 @@ public interface IDictionary
     public boolean isDefined(String name);
 
     public boolean isNull(String name);
+    
+    public Object remove(String name);
 
     public List<String> keys();
 }
