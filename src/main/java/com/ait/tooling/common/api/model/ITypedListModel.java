@@ -16,10 +16,8 @@
 
 package com.ait.tooling.common.api.model;
 
-import java.io.Serializable;
-
 import com.ait.tooling.common.api.types.ITypedList;
 
-public interface ITypedListModel<R, T> extends IModel<R>, ITypedList<T>, Serializable
+public interface ITypedListModel<R, T> extends IModel<R>, ITypedList<T>
 {
 }

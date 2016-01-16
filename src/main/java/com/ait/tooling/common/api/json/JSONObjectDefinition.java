@@ -16,11 +16,9 @@
 
 package com.ait.tooling.common.api.json;
 
-import java.io.Serializable;
-
 import com.ait.tooling.common.api.types.IMixedStringHashDefinition;
 
-public interface JSONObjectDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedStringHashDefinition<L, O>, JSONStringify, Serializable
+public interface JSONObjectDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedStringHashDefinition<L, O>, JSONStringify
 {
     public JSONType getJSONType(String name);
 

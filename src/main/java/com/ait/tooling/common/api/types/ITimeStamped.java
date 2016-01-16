@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface ITimeStamped extends Serializable
+public interface ITimeStamped
 {
     public long getTimeStamp();
 }

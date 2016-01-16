@@ -16,8 +16,6 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface IListValuedList<T extends IListValued<T>> extends ITypedList<T>, Serializable
+public interface IListValuedList<T extends IListValued<T>> extends ITypedList<T>
 {
 }

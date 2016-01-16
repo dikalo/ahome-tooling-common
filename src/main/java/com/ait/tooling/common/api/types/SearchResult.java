@@ -16,42 +16,19 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class SearchResult<T extends Comparable<T>> implements ISearchResult<T>, Serializable
+public class SearchResult<T extends Comparable<T>> implements ISearchResult<T>
 {
-    private static final long serialVersionUID = 2440955017561840921L;
+    private final T             m_valu;
 
-    private final T           m_valu;
+    private final String        m_iden;
 
-    private final long        m_time;
-
-    private final String      m_iden;
-
-    private final String      m_mime;
-
-    private final String      m_prop;
-
-    private final String      m_desc;
-
-    private final String      m_path;
-
-    public SearchResult(final T valu, final String iden, final String mime, final String prop, final String desc, final String path, final long time)
+    public SearchResult(final T valu, final String iden)
     {
         m_valu = Objects.requireNonNull(valu);
 
         m_iden = Objects.requireNonNull(iden);
-
-        m_mime = Objects.requireNonNull(mime);
-
-        m_prop = Objects.requireNonNull(prop);
-
-        m_desc = Objects.requireNonNull(desc);
-
-        m_path = Objects.requireNonNull(path);
-
-        m_time = time;
     }
 
     @Override
@@ -61,39 +38,9 @@ public class SearchResult<T extends Comparable<T>> implements ISearchResult<T>, 
     }
 
     @Override
-    public long getTime()
-    {
-        return m_time;
-    }
-
-    @Override
-    public String getPath()
-    {
-        return m_path;
-    }
-
-    @Override
-    public String getMimeType()
-    {
-        return m_mime;
-    }
-
-    @Override
-    public String getProperty()
-    {
-        return m_prop;
-    }
-
-    @Override
     public T getValue()
     {
         return m_valu;
-    }
-
-    @Override
-    public String getDescription()
-    {
-        return m_desc;
     }
 
     @Override

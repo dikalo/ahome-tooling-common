@@ -16,19 +16,16 @@
 
 package com.ait.tooling.common.api.hash;
 
-import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
-public final class Hasher implements IHasher, Serializable
+public final class Hasher implements IHasher
 {
-    private static final long serialVersionUID = -2752202273489654010L;
+    private final Random   m_rand = new Random();
 
-    private final Random      m_rand           = new Random();
-
-    private final IHash512    m_hash;
+    private final IHash512 m_hash;
 
     public Hasher(final IHash512 hash)
     {

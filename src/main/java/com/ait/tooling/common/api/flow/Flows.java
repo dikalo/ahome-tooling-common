@@ -16,22 +16,19 @@
 
 package com.ait.tooling.common.api.flow;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Flows implements Serializable
+public final class Flows
 {
-    private static final long serialVersionUID = 3013490177528306662L;
-
     protected Flows()
     {
     }
 
-    public static interface BooleanOp extends Serializable
+    public static interface BooleanOp
     {
         public boolean test();
     }
@@ -52,8 +49,6 @@ public final class Flows implements Serializable
 
         return new BooleanOp()
         {
-            private static final long serialVersionUID = 3705908438801337401L;
-
             @Override
             public final boolean test()
             {
@@ -68,8 +63,6 @@ public final class Flows implements Serializable
 
         return new BooleanOp()
         {
-            private static final long serialVersionUID = 6827650384317753155L;
-
             @Override
             public final boolean test()
             {
@@ -78,8 +71,7 @@ public final class Flows implements Serializable
         };
     }
 
-    @SuppressWarnings("serial")
-    public static abstract class PredicateBooleanOp<T> implements BooleanOp, Predicate<T>
+    public static abstract class PredicateBooleanOp<T>implements BooleanOp, Predicate<T>
     {
         private final T m_value;
 
@@ -97,9 +89,7 @@ public final class Flows implements Serializable
 
     private static final class OrBooleanOp implements BooleanOp
     {
-        private static final long serialVersionUID = 6587934314073977830L;
-
-        final List<BooleanOp>     m_list;
+        final List<BooleanOp> m_list;
 
         public OrBooleanOp(final List<BooleanOp> list)
         {
@@ -124,9 +114,7 @@ public final class Flows implements Serializable
 
     private static final class AndBooleanOp implements BooleanOp
     {
-        private static final long serialVersionUID = 6347981775849160893L;
-
-        final List<BooleanOp>     m_list;
+        final List<BooleanOp> m_list;
 
         public AndBooleanOp(final List<BooleanOp> list)
         {

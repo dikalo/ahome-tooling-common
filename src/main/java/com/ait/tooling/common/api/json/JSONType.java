@@ -16,11 +16,9 @@
 
 package com.ait.tooling.common.api.json;
 
-import java.io.Serializable;
-
 import com.ait.tooling.common.api.types.IStringValued;
 
-public enum JSONType implements IStringValued, Serializable
+public enum JSONType implements IStringValued
 {
     ARRAY("array"), OBJECT("object"), STRING("string"), NUMBER("number"), BOOLEAN("boolean"), DATE("date"), FUNCTION("function"), UNDEFINED("undefined"), NULL("null");
 

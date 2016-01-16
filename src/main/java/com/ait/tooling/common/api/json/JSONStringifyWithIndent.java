@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.json;
 
-import java.io.Serializable;
-
-public interface JSONStringifyWithIndent extends JSONStringify, Serializable
+public interface JSONStringifyWithIndent extends JSONStringify
 {
     public String toJSONString(int spaces);
 

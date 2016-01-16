@@ -16,15 +16,12 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
-public final class StringOps implements Serializable
+public final class StringOps
 {
-    private static final long    serialVersionUID   = 8903014888710045180L;
-
     private static final String  SEPR               = ", ";
 
     public static final String   NULL_STRING        = null;

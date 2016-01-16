@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface IIdentified extends Serializable
+public interface IIdentified
 {
     public String getId();
 }

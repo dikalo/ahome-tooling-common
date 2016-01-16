@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.json;
 
-import java.io.Serializable;
-
-public interface JSONStringify extends Serializable
+public interface JSONStringify
 {
     public String toJSONString();
 }

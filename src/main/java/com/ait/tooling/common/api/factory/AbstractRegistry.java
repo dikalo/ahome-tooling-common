@@ -16,7 +16,6 @@
 
 package com.ait.tooling.common.api.factory;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -26,8 +25,7 @@ import java.util.Objects;
 import com.ait.tooling.common.api.java.util.function.Supplier;
 import com.ait.tooling.common.api.types.IStringValued;
 
-@SuppressWarnings("serial")
-public abstract class AbstractRegistry<F> implements IRegistry<F>, Serializable
+public abstract class AbstractRegistry<F> implements IRegistry<F>
 {
     private boolean                                  m_canmodify;
 
@@ -86,7 +84,6 @@ public abstract class AbstractRegistry<F> implements IRegistry<F>, Serializable
         return Collections.unmodifiableList(new ArrayList<String>(m_suppliers.keySet()));
     }
 
-    @Override
     public synchronized F get(final String name)
     {
         F factory = m_factories.get(Objects.requireNonNull(name));
@@ -129,12 +126,27 @@ public abstract class AbstractRegistry<F> implements IRegistry<F>, Serializable
         {
             if (isDefined(name))
             {
-                throw new UnmodifiableRegistryException(name);
+                throw new UnmodifiableTypeRegistryException(name);
             }
             else
             {
                 m_suppliers.put(name, supplier);
             }
+        }
+    }
+
+    @Override
+    public synchronized void clear()
+    {
+        if (isModifiable())
+        {
+            m_factories.clear();
+
+            m_suppliers.clear();
+        }
+        else
+        {
+            throw new UnmodifiableTypeRegistryException("clear()");
         }
     }
 }

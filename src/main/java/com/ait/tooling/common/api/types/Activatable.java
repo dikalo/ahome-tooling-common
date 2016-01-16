@@ -18,9 +18,7 @@ package com.ait.tooling.common.api.types;
 
 public class Activatable implements IActivatable
 {
-    private static final long serialVersionUID = -7816996046350441349L;
-
-    private boolean           m_active;
+    private boolean m_active;
 
     public Activatable()
     {

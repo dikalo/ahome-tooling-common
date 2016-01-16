@@ -16,10 +16,10 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface IMixedList extends Serializable
+public interface IMixedList
 {
+    public int size();
+
     public void clear();
 
     public boolean isArray(int index);
@@ -41,6 +41,4 @@ public interface IMixedList extends Serializable
     public boolean isString(int index);
 
     public boolean isNativeFunction(int index);
-
-    public int size();
 }

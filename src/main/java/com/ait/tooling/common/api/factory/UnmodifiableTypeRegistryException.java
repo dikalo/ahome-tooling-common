@@ -16,11 +16,11 @@
 
 package com.ait.tooling.common.api.factory;
 
-public class UnmodifiableRegistryException extends RuntimeException
+public class UnmodifiableTypeRegistryException extends RuntimeException
 {
     private static final long serialVersionUID = -6129706541343620918L;
 
-    public UnmodifiableRegistryException(final String type)
+    public UnmodifiableTypeRegistryException(final String type)
     {
         super("Registry is unmodifiable for type: " + type);
     }

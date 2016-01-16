@@ -16,17 +16,6 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface ISearchResult<T extends Comparable<T>> extends IIdentifiedValue<T>, Comparable<T>, Serializable
+public interface ISearchResult<T extends Comparable<T>> extends IIdentifiedValue<T>, Comparable<T>
 {
-    public long getTime();
-
-    public String getPath();
-
-    public String getMimeType();
-
-    public String getProperty();
-
-    public String getDescription();
 }

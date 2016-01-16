@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
-
-public interface INamedType extends INamed, Serializable
+public interface INamedType extends INamed
 {
     public void setName(String name);
 }

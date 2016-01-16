@@ -16,9 +16,7 @@
 
 package com.ait.tooling.common.api.model;
 
-import java.io.Serializable;
-
-public interface IModel<T> extends Serializable
+public interface IModel<T>
 {
     public T getModel();
 }

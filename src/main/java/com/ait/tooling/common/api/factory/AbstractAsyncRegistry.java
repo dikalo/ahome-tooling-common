@@ -16,7 +16,6 @@
 
 package com.ait.tooling.common.api.factory;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -26,8 +25,7 @@ import java.util.Objects;
 import com.ait.tooling.common.api.java.util.function.Supplier;
 import com.ait.tooling.common.api.types.IStringValued;
 
-@SuppressWarnings("serial")
-public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>, Serializable
+public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
 {
     private boolean                                  m_canmodify;
 
@@ -89,7 +87,7 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>, Ser
     public synchronized void get(final String name, final IAsyncRegistryResult<F> callback)
     {
         Objects.requireNonNull(callback);
-        
+
         F factory = m_factories.get(Objects.requireNonNull(name));
 
         if (null == factory)
@@ -137,12 +135,27 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>, Ser
         {
             if (isDefined(name))
             {
-                throw new UnmodifiableRegistryException(name);
+                throw new UnmodifiableTypeRegistryException(name);
             }
             else
             {
                 m_suppliers.put(name, supplier);
             }
+        }
+    }
+
+    @Override
+    public synchronized void clear()
+    {
+        if (isModifiable())
+        {
+            m_factories.clear();
+
+            m_suppliers.clear();
+        }
+        else
+        {
+            throw new UnmodifiableTypeRegistryException("clear()");
         }
     }
 }

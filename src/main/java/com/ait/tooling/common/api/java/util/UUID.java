@@ -16,12 +16,8 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.io.Serializable;
-
-public final class UUID implements Serializable
-{
-    private static final long serialVersionUID = 237905255952564761L;
-    
+public final class UUID
+{    
     private static final char[] CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
 
     protected UUID()

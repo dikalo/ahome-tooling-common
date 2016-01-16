@@ -16,7 +16,6 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -26,10 +25,8 @@ import java.util.Objects;
 import com.ait.tooling.common.api.java.util.function.Consumer;
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class AsyncSortingPredicateFilter<T> implements IAsyncFilter<T>, Serializable
+public final class AsyncSortingPredicateFilter<T> implements IAsyncFilter<T>
 {
-    private static final long   serialVersionUID = 422511506080615981L;
-
     private final Predicate<T>  m_predicate;
 
     private final Comparator<T> m_compareit;

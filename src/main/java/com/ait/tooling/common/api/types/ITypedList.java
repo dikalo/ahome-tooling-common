@@ -16,10 +16,9 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
 import java.util.Collection;
 
-public interface ITypedList<T> extends Serializable
+public interface ITypedList<T>
 {
     public T get(int index);
 

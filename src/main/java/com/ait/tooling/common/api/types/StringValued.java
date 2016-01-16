@@ -16,14 +16,11 @@
 
 package com.ait.tooling.common.api.types;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-public class StringValued implements IStringValued, Serializable
+public class StringValued implements IStringValued
 {
-    private static final long serialVersionUID = 6963123034935215387L;
-
-    private final String      m_value;
+    private final String m_value;
 
     public StringValued(final String value)
     {

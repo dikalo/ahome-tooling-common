@@ -16,11 +16,9 @@
 
 package com.ait.tooling.common.api.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 
-@SuppressWarnings("serial")
-public abstract class AbstractModelRepresentation<T> implements IModel<T>, Serializable
+public abstract class AbstractModelRepresentation<T> implements IModel<T>
 {
     private final T m_model;
 

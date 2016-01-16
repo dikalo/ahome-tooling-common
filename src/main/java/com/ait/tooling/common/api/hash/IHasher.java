@@ -16,8 +16,6 @@
 
 package com.ait.tooling.common.api.hash;
 
-import java.io.Serializable;
-
-public interface IHasher extends IHash512, IHash512Salt, Serializable
+public interface IHasher extends IHash512, IHash512Salt
 {
 }

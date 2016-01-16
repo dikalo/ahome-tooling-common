@@ -16,17 +16,14 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
 import com.ait.tooling.common.api.java.util.function.Function;
 import com.ait.tooling.common.api.java.util.function.Predicate;
 
-public final class Functions implements Serializable
+public final class Functions
 {
-    private static final long serialVersionUID = -3629408146609381550L;
-
     protected Functions()
     {
     }
