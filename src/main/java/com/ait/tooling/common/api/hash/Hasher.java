@@ -17,14 +17,11 @@
 package com.ait.tooling.common.api.hash;
 
 import java.util.Objects;
-import java.util.Random;
 
 import com.ait.tooling.common.api.java.util.StringOps;
 
 public final class Hasher implements IHasher
 {
-    private final Random   m_rand = new Random();
-
     private final IHash512 m_hash;
 
     public Hasher(final IHash512 hash)
@@ -41,7 +38,7 @@ public final class Hasher implements IHasher
     @Override
     public String sha512(final String text, final String salt)
     {
-        return sha512(Objects.requireNonNull(text), Objects.requireNonNull(salt), m_rand.nextInt((salt.length() + 1) * 2));
+        return sha512(Objects.requireNonNull(text), salt, (salt.length() + 1) * 2);
     }
 
     @Override
