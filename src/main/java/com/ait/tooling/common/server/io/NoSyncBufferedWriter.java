@@ -18,6 +18,8 @@ package com.ait.tooling.common.server.io;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Objects;
 
@@ -71,7 +73,22 @@ public class NoSyncBufferedWriter extends BufferedWriter
         m_charbf = new char[m_sizeof];
     }
 
-    private void doEnsuredOpen() throws IOException
+    public NoSyncBufferedWriter(final OutputStream stream)
+    {
+        this(Objects.requireNonNull(stream), DEFAULT_CAPACITY);
+    }
+
+    public NoSyncBufferedWriter(final OutputStream stream, final int capacity)
+    {
+        this(new OutputStreamWriter(Objects.requireNonNull(stream)), capacity);
+    }
+
+    protected final Writer getProxyWriter()
+    {
+        return m_writer;
+    }
+
+    protected void doEnsuredOpen() throws IOException
     {
         if (null == m_writer)
         {
@@ -79,7 +96,7 @@ public class NoSyncBufferedWriter extends BufferedWriter
         }
     }
 
-    private void doFlushBuffer() throws IOException
+    protected void doFlushBuffer() throws IOException
     {
         doEnsuredOpen();
 
@@ -196,14 +213,19 @@ public class NoSyncBufferedWriter extends BufferedWriter
         try
         {
             doFlushBuffer();
+
+            m_writer.close();
         }
         finally
         {
-            m_writer.close();
-
-            m_writer = null;
-
-            m_charbf = null;
+            doCleanIntern();
         }
+    }
+
+    protected void doCleanIntern()
+    {
+        m_writer = null;
+
+        m_charbf = null;
     }
 }

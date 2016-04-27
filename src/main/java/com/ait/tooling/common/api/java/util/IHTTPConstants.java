@@ -96,6 +96,8 @@ public interface IHTTPConstants
 
     public static final String X_STRICT_JSON_FORMAT_HEADER      = "X-Strict-JSON-Format";
 
+    public static final String X_CONTENT_TYPE_OPTIONS_HEADER    = "X-Content-Type-Options";
+
     public static final String CACHE_CONTROL_MAX_AGE_PREFIX     = "max-age=";
 
     public static final String NO_CACHE_PRAGMA_HEADER_VALUE     = "no-cache";

@@ -145,7 +145,7 @@ public final class StringOps
         {
             if (null != item)
             {
-                builder.append('"').append(item).append('"');
+                builder.append('"').append(escapeForJavaScript(item)).append('"');
             }
             else
             {
