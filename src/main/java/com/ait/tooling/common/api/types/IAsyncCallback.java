@@ -14,12 +14,11 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.java.util.function;
+package com.ait.tooling.common.api.types;
 
-import com.ait.tooling.common.api.java.lang.FunctionalInterface;
-
-@FunctionalInterface
-public interface BiConsumer<T, U>
+public interface IAsyncCallback<T>
 {
-    public void accept(T t, U u);
+    public void onFailure(Throwable throwable);
+    
+    public void onSuccess(T result);
 }

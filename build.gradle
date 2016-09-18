@@ -41,11 +41,11 @@ apply plugin: 'eclipse'
 
 compileJava.options.encoding = 'UTF-8'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
-targetCompatibility = 1.7
+targetCompatibility = 1.8
 
-version = '1.0.185-RELEASE'
+version = '2.0.0-SNAPSHOT'
 
 group = 'com.ahome-it'
 
@@ -180,7 +180,8 @@ uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-            repository(url: "${sonatype_stageingURL}") {
+            //repository(url: "${sonatype_stageingURL}") {
+            repository(url: "${sonatype_snapshotURL}") {
                 authentication(userName: "${sonatype_user}", password: "${sonatype_password}")
             }
             pom.project {

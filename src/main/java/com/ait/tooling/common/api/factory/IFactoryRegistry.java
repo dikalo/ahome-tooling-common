@@ -16,9 +16,11 @@
 
 package com.ait.tooling.common.api.factory;
 
-import com.ait.tooling.common.api.java.util.function.Consumer;
+import com.ait.tooling.common.api.types.IDictionary;
 
-public interface IAsyncRegistryResult<T> extends Consumer<T>
+public interface IFactoryRegistry<F> extends IDictionary
 {
-    public void onFailure(Throwable caught);
+    public F get(String name);
+
+    public boolean isModifiable();
 }

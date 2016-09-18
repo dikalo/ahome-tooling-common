@@ -18,7 +18,7 @@ package com.ait.tooling.common.api.json;
 
 import com.ait.tooling.common.api.types.IMixedStringHashDefinition;
 
-public interface JSONObjectDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedStringHashDefinition<L, O>, JSONStringify
+public interface JSONObjectDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedStringHashDefinition<L, O>, JSONStringifyStrict
 {
     public JSONType getJSONType(String name);
 

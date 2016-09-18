@@ -16,9 +16,12 @@
 
 package com.ait.tooling.common.api.factory;
 
+import com.ait.tooling.common.api.types.IAsyncCallback;
 import com.ait.tooling.common.api.types.IDictionary;
 
-public interface IAsyncRegistry<T> extends IDictionary
+public interface IAsyncFactoryRegistry<F> extends IDictionary
 {
+    public void get(String name, IAsyncCallback<F> callback);
+    
     public boolean isModifiable();
 }

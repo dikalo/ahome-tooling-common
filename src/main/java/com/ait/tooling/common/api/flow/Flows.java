@@ -19,8 +19,7 @@ package com.ait.tooling.common.api.flow;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import com.ait.tooling.common.api.java.util.function.Predicate;
+import java.util.function.Predicate;
 
 public final class Flows
 {
@@ -71,7 +70,7 @@ public final class Flows
         };
     }
 
-    public static abstract class PredicateBooleanOp<T>implements BooleanOp, Predicate<T>
+    public static abstract class PredicateBooleanOp<T> implements BooleanOp, Predicate<T>
     {
         private final T m_value;
 

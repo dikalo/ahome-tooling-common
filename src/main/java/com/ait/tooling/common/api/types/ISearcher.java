@@ -16,8 +16,8 @@
 
 package com.ait.tooling.common.api.types;
 
-import com.ait.tooling.common.api.java.util.function.Consumer;
-import com.ait.tooling.common.api.java.util.function.Predicate;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public interface ISearcher<T extends Comparable<T>>
 {

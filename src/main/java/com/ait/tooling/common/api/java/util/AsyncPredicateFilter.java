@@ -19,9 +19,8 @@ package com.ait.tooling.common.api.java.util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
-
-import com.ait.tooling.common.api.java.util.function.Consumer;
-import com.ait.tooling.common.api.java.util.function.Predicate;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public final class AsyncPredicateFilter<T> implements IAsyncFilter<T>
 {

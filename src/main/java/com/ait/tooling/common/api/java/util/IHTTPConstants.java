@@ -66,6 +66,8 @@ public interface IHTTPConstants
 
     public static final String STRICT_TRANSPORT_SECURITY_HEADER = "Strict-Transport-Security";
 
+    public static final String WWW_AUTHENTICATE                 = "WWW-Authenticate";
+
     public static final String X_FRAME_OPTIONS_HEADER           = "X-Frame-Options";
 
     public static final String X_POWERED_BY_HEADER              = "X-Powered-By";
@@ -103,6 +105,22 @@ public interface IHTTPConstants
     public static final String NO_CACHE_PRAGMA_HEADER_VALUE     = "no-cache";
 
     public static final String NO_CACHE_CONTROL_HEADER_VALUE    = "no-cache, no-store, must-revalidate";
+
+    public static final String HTTP_METHOD_DELETE               = "DELETE";
+
+    public static final String HTTP_METHOD_HEAD                 = "HEAD";
+
+    public static final String HTTP_METHOD_GET                  = "GET";
+
+    public static final String HTTP_METHOD_OPTIONS              = "OPTIONS";
+
+    public static final String HTTP_METHOD_POST                 = "POST";
+
+    public static final String HTTP_METHOD_PATCH                = "PATCH";
+
+    public static final String HTTP_METHOD_PUT                  = "PUT";
+
+    public static final String HTTP_METHOD_TRACE                = "TRACE";
 
     public static final long   DAY_IN_SECONDS                   = 86400L;
 

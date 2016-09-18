@@ -14,11 +14,11 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.java.util.function;
+package com.ait.tooling.common.api.json;
 
-import com.ait.tooling.common.api.java.lang.FunctionalInterface;
-
-@FunctionalInterface
-public interface UnaryOperator<T> extends Function<T, T>
+public interface JSONStringifyWithIndentStrict extends JSONStringifyStrict
 {
+    public String toJSONString(int spaces);
+
+    public String toJSONString(String prefix);
 }

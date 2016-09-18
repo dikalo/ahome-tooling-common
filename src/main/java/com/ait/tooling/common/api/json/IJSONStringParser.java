@@ -14,12 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.java.util.function;
+package com.ait.tooling.common.api.json;
 
-import com.ait.tooling.common.api.java.lang.FunctionalInterface;
-
-@FunctionalInterface
-public interface Supplier<T>
+public interface IJSONStringParser<T>
 {
-    public T get();
+    public T parse(String string) throws JSONParserException;
 }

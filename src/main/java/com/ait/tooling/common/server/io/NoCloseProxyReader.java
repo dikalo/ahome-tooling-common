@@ -36,6 +36,5 @@ public class NoCloseProxyReader extends AbstractProxyReader
     @Override
     public void close() throws IOException
     {
-        ;
     }
 }

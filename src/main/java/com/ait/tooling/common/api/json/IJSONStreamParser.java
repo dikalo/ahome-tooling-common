@@ -14,12 +14,14 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.java.util.function;
+package com.ait.tooling.common.api.json;
 
-import com.ait.tooling.common.api.java.lang.FunctionalInterface;
+import java.io.InputStream;
+import java.io.Reader;
 
-@FunctionalInterface
-public interface BiPredicate<T, U>
+public interface IJSONStreamParser<T>
 {
-    public boolean test(T t, U u);
+    public T parse(Reader reader) throws JSONParserException;
+    
+    public T parse(InputStream stream) throws JSONParserException;
 }

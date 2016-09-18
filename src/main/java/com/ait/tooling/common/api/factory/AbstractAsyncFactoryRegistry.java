@@ -21,11 +21,11 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
-import com.ait.tooling.common.api.java.util.function.Supplier;
-import com.ait.tooling.common.api.types.IStringValued;
+import com.ait.tooling.common.api.types.IAsyncCallback;
 
-public abstract class AbstractRegistry<F> implements IRegistry<F>
+public abstract class AbstractAsyncFactoryRegistry<F> implements IAsyncFactoryRegistry<F>
 {
     private boolean                                  m_canmodify;
 
@@ -33,12 +33,12 @@ public abstract class AbstractRegistry<F> implements IRegistry<F>
 
     private final LinkedHashMap<String, Supplier<F>> m_suppliers = new LinkedHashMap<String, Supplier<F>>();
 
-    protected AbstractRegistry()
+    protected AbstractAsyncFactoryRegistry()
     {
         this(false);
     }
 
-    protected AbstractRegistry(final boolean canmodify)
+    protected AbstractAsyncFactoryRegistry(final boolean canmodify)
     {
         setModifiable(canmodify);
     }
@@ -84,8 +84,10 @@ public abstract class AbstractRegistry<F> implements IRegistry<F>
         return Collections.unmodifiableList(new ArrayList<String>(m_suppliers.keySet()));
     }
 
-    public synchronized F get(final String name)
+    public synchronized void get(final String name, final IAsyncCallback<F> callback)
     {
+        Objects.requireNonNull(callback);
+
         F factory = m_factories.get(Objects.requireNonNull(name));
 
         if (null == factory)
@@ -102,12 +104,14 @@ public abstract class AbstractRegistry<F> implements IRegistry<F>
                 }
             }
         }
-        return factory;
-    }
-
-    protected synchronized void putFactorySupplier(final IStringValued name, final Supplier<F> supplier)
-    {
-        putFactorySupplier(Objects.requireNonNull(Objects.requireNonNull(name).getValue()), Objects.requireNonNull(supplier));
+        if (null == factory)
+        {
+            callback.onFailure(new UndefinedTypeRegistryException(name));
+        }
+        else
+        {
+            callback.onSuccess(factory);
+        }
     }
 
     protected synchronized void putFactorySupplier(final String name, final Supplier<F> supplier)

@@ -21,11 +21,9 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Supplier;
 
-import com.ait.tooling.common.api.java.util.function.Supplier;
-import com.ait.tooling.common.api.types.IStringValued;
-
-public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
+public abstract class AbstractFactoryRegistry<F> implements IFactoryRegistry<F>
 {
     private boolean                                  m_canmodify;
 
@@ -33,12 +31,12 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
 
     private final LinkedHashMap<String, Supplier<F>> m_suppliers = new LinkedHashMap<String, Supplier<F>>();
 
-    protected AbstractAsyncRegistry()
+    protected AbstractFactoryRegistry()
     {
         this(false);
     }
 
-    protected AbstractAsyncRegistry(final boolean canmodify)
+    protected AbstractFactoryRegistry(final boolean canmodify)
     {
         setModifiable(canmodify);
     }
@@ -84,10 +82,9 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
         return Collections.unmodifiableList(new ArrayList<String>(m_suppliers.keySet()));
     }
 
-    public synchronized void get(final String name, final IAsyncRegistryResult<F> callback)
+    @Override
+    public synchronized F get(final String name)
     {
-        Objects.requireNonNull(callback);
-
         F factory = m_factories.get(Objects.requireNonNull(name));
 
         if (null == factory)
@@ -104,19 +101,7 @@ public abstract class AbstractAsyncRegistry<F> implements IAsyncRegistry<F>
                 }
             }
         }
-        if (null == factory)
-        {
-            callback.onFailure(new UndefinedTypeRegistryException(name));
-        }
-        else
-        {
-            callback.accept(factory);
-        }
-    }
-
-    protected synchronized void putFactorySupplier(final IStringValued name, final Supplier<F> supplier)
-    {
-        putFactorySupplier(Objects.requireNonNull(Objects.requireNonNull(name).getValue()), Objects.requireNonNull(supplier));
+        return factory;
     }
 
     protected synchronized void putFactorySupplier(final String name, final Supplier<F> supplier)

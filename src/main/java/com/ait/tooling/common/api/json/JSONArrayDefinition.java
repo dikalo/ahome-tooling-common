@@ -18,7 +18,7 @@ package com.ait.tooling.common.api.json;
 
 import com.ait.tooling.common.api.types.IMixedListDefinition;
 
-public interface JSONArrayDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedListDefinition<L, O>, JSONStringify
+public interface JSONArrayDefinition<L extends JSONArrayDefinition<L, O>, O extends JSONObjectDefinition<L, O>> extends IMixedListDefinition<L, O>, JSONStringifyStrict
 {
     public JSONType getJSONType(int index);
 

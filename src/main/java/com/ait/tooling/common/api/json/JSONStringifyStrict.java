@@ -14,9 +14,9 @@
    limitations under the License.
  */
 
-package com.ait.tooling.common.api.java.util.function;
+package com.ait.tooling.common.api.json;
 
-public interface IAsyncSupplier<T>
+public interface JSONStringifyStrict extends JSONStringify
 {
-    public void get(Consumer<T> callback);
+    public String toJSONString(boolean strict);
 }

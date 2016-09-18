@@ -48,6 +48,5 @@ public class NoCloseBufferedReader extends BufferedReader
     @Override
     public void close() throws IOException
     {
-        ;
     }
 }
