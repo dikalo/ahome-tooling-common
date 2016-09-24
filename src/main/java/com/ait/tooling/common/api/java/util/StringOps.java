@@ -16,10 +16,8 @@
 
 package com.ait.tooling.common.api.java.util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -441,45 +439,5 @@ public final class StringOps
             }
         }
         return builder;
-    }
-
-    public static final String format(final String format, final Object... values)
-    {
-        return String.format(Objects.requireNonNull(format), values);
-    }
-
-    public static final String interp(String format, final Map<String, ?> hashes)
-    {
-        Objects.requireNonNull(hashes);
-
-        Objects.requireNonNull(format);
-
-        final ArrayList<Object> args = new ArrayList<Object>(0);
-
-        int b = 0;
-
-        while (true)
-        {
-            final int i = format.indexOf("{", b);
-
-            if (i == -1)
-            {
-                break;// done
-            }
-            final int e = format.indexOf('}', i + 1);
-
-            if (e == -1)
-            {
-                break;// done
-            }
-            if (b != i)
-            {
-                args.add(hashes.get(format.substring(b, i)));
-            }
-            format = format.substring(i + 1, e);
-
-            b = e + 1;
-        }
-        return format(format, args.toArray());
     }
 }
