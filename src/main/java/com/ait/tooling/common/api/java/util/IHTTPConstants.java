@@ -65,6 +65,8 @@ public interface IHTTPConstants
     public static final String SET_COOKIE_HEADER                = "Set-Cookie";
 
     public static final String STRICT_TRANSPORT_SECURITY_HEADER = "Strict-Transport-Security";
+    
+    public static final String WWW_AUTHENTICATE                 = "WWW-Authenticate";
 
     public static final String X_FRAME_OPTIONS_HEADER           = "X-Frame-Options";
 
