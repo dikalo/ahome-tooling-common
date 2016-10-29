@@ -19,7 +19,6 @@ package com.ait.tooling.common.api.java.util;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public final class StringOps
 {
@@ -199,11 +198,6 @@ public final class StringOps
     public static final String requireTrimOrNull(final String string, final String reason)
     {
         return Objects.requireNonNull(toTrimOrNull(string), Objects.requireNonNull(reason));
-    }
-
-    public static final String requireTrimOrNull(final String string, final Supplier<String> supplier)
-    {
-        return Objects.requireNonNull(toTrimOrNull(string), Objects.requireNonNull(supplier));
     }
 
     public static final boolean isDigits(final String string)

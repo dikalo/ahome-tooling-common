@@ -16,17 +16,24 @@
  * limitations under the License.
  */
 -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="AhomeCommonBuildDescriptor" class="com.ait.tooling.server.core.support.spring.BuildDescriptor">
 		<constructor-arg value="@GRADLE_BUILD_PROJECT_TITLE@"/>
-		<property name="buildUser" value="@GRADLE_BUILD_USER@"/>
+		<property name="buildUser">
+			<value><![CDATA[@GRADLE_BUILD_USER@]]></value>
+		</property>
 		<property name="buildDate" value="@GRADLE_BUILD_DATE@"/>
 		<property name="javaVersion" value="@GRADLE_JAVA_VERSION@"/>
 		<property name="buildGITCommitHash" value="@GRADLE_GIT_COMMIT_HASH@"/>
-		<property name="buildGITCommitUser" value="@GRADLE_GIT_COMMIT_USER@"/>
-		<property name="buildGITCommitMessage" value="@GRADLE_GIT_COMMIT_MESSAGE@"/>
+		<property name="buildGITCommitUser">
+			<value><![CDATA[@GRADLE_GIT_COMMIT_USER@]]></value>
+		</property>
+		<property name="buildGITCommitMessage">
+			<value><![CDATA[@GRADLE_GIT_COMMIT_MESSAGE@]]></value>
+		</property>
 		<property name="buildServerHost" value="@GRADLE_BUILD_SERVER_HOST@"/>
 		<property name="buildServerBuild" value="@GRADLE_BUILD_SERVER_BUILD@"/>
 		<property name="buildModuleVersion" value="@GRADLE_BUILD_ARTIFACT_ID@-@GRADLE_BUILD_MODULE_VERSION@.jar"/>
