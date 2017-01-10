@@ -14,13 +14,13 @@ Maven:
 <dependency>
   <groupId>com.ahome-it</groupId>
   <artifactId>ahome-tooling-common</artifactId>
-  <version>2.0.1-RELEASE</version>
+  <version>2.0.2-RELEASE</version>
 </dependency>
 ```
 Gradle:
 ```
 dependencies {
-    compile(group:'com.ahome-it',name:'ahome-tooling-common',version:'2.0.1-RELEASE')
+    compile(group:'com.ahome-it',name:'ahome-tooling-common',version:'2.0.2-RELEASE')
 }
 ```
 Javadoc URL:
@@ -29,7 +29,7 @@ https://lienzo-core.com/documents/javadoc/ahome-tooling-common
 
 License:
 
-Copyright (c) 2014,2015,2016 Ahome Innovation Technologies. All rights reserved.
+Copyright (c) 2017 Ahome Innovation Technologies. All rights reserved.
 
 Ahome Tooling Common is released under version 2.0 of the Apache License.
 

@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014,2015,2016 Ahome' Innovation Technologies. All rights reserved.
+   Copyright (c) 2017 Ahome' Innovation Technologies. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -76,6 +76,96 @@ public interface IHTTPConstants
 
     public static final String CONTENT_TYPE_APPLICATION_JAVASCRIPT = "application/javascript";
 
+    public static final String ACCEPT                              = "Accept";
+
+    public static final String ACCEPT_CHARSET                      = "Accept-Charset";
+
+    public static final String ACCEPT_ENCODING                     = "Accept-Encoding";
+
+    public static final String ACCEPT_LANGUAGE                     = "Accept-Language";
+
+    public static final String ACCEPT_RANGES                       = "Accept-Ranges";
+
+    public static final String ACCESS_CONTROL_ALLOW_CREDENTIALS    = "Access-Control-Allow-Credentials";
+
+    public static final String ACCESS_CONTROL_ALLOW_HEADERS        = "Access-Control-Allow-Headers";
+
+    public static final String ACCESS_CONTROL_ALLOW_METHODS        = "Access-Control-Allow-Methods";
+
+    public static final String ACCESS_CONTROL_ALLOW_ORIGIN         = "Access-Control-Allow-Origin";
+
+    public static final String ACCESS_CONTROL_EXPOSE_HEADERS       = "Access-Control-Expose-Headers";
+
+    public static final String ACCESS_CONTROL_MAX_AGE              = "Access-Control-Max-Age";
+
+    public static final String ACCESS_CONTROL_REQUEST_HEADERS      = "Access-Control-Request-Headers";
+
+    public static final String ACCESS_CONTROL_REQUEST_METHOD       = "Access-Control-Request-Method";
+
+    public static final String AGE_HEADER                          = "Age";
+
+    public static final String ALLOW_HEADER                        = "Allow";
+
+    public static final String CONNECTION_HEADER                   = "Connection";
+
+    public static final String CONTENT_ENCODING_HEADER             = "Content-Encoding";
+
+    public static final String CONTENT_LANGUAGE_HEADER             = "Content-Language";
+
+    public static final String CONTENT_LOCATION_HEADER             = "Content-Location";
+
+    public static final String CONTENT_RANGE_HEADER                = "Content-Range";
+
+    public static final String ETAG_HEADER                         = "ETag";
+
+    public static final String EXPECT_HEADER                       = "Expect";
+
+    public static final String FROM_HEADER                         = "From";
+
+    public static final String HOST_HEADER                         = "Host";
+
+    public static final String IF_MATCH_HEADER                     = "If-Match";
+
+    public static final String IF_MODIFIED_SINCE_HEADER            = "If-Modified-Since";
+
+    public static final String IF_NONE_MATCH_HEADER                = "If-None-Match";
+
+    public static final String IF_RANGE_HEADER                     = "If-Range";
+
+    public static final String LAST_MODIFIED_HEADER                = "Last-Modified";
+
+    public static final String LINK_HEADER                         = "Link";
+
+    public static final String LOCATION_HEADER                     = "Location";
+
+    public static final String MAX_FORWARDS_HEADER                 = "Max-Forwards";
+
+    public static final String ORIGIN_HEADER                       = "Origin";
+
+    public static final String PROXY_AUTHENTICATE_HEADER           = "Proxy-Authenticate";
+
+    public static final String PROXY_AUTHORIZATION_HEADER          = "Proxy-Authorization";
+
+    public static final String RANGE_HEADER                        = "Range";
+
+    public static final String RETRY_AFTER_HEADER                  = "Retry-After";
+
+    public static final String SERVER_HEADER                       = "Server";
+
+    public static final String TE_HEADER                           = "TE";
+
+    public static final String TRAILER_HEADER                      = "Trailer";
+
+    public static final String TRANSFER_ENCODING_HEADER            = "Transfer-Encoding";
+
+    public static final String VARY_HEADER                         = "Vary";
+
+    public static final String VIA_HEADER                          = "Via";
+
+    public static final String WARNING_HEADER                      = "Warning";
+
+    public static final String AUTHORIZATION_HEADER                = "Authorization";
+
     public static final String ACCEPT_HEADER                       = "Accept";
 
     public static final String CONTENT_TYPE_HEADER                 = "Content-Type";
@@ -113,6 +203,10 @@ public interface IHTTPConstants
     public static final String STRICT_TRANSPORT_SECURITY_HEADER    = "Strict-Transport-Security";
 
     public static final String WWW_AUTHENTICATE                    = "WWW-Authenticate";
+
+    public static final String X_GATEWAY_REQUEST_ID_HEADER         = "request-id";
+
+    public static final String X_GATEWAY_COMPANY_ID_HEADER         = "gateway-company-id";
 
     public static final String X_FRAME_OPTIONS_HEADER              = "X-Frame-Options";
 
@@ -152,6 +246,8 @@ public interface IHTTPConstants
 
     public static final String ATTACHMENT_FILENAME_PREFIX          = "attachment; filename=";
 
+    public static final String ATTACHMENT_INLINE_FILENAME_PREFIX   = "inline; filename=";
+
     public static final String NO_CACHE_PRAGMA_HEADER_VALUE        = "no-cache";
 
     public static final String NO_CACHE_CONTROL_HEADER_VALUE       = "no-cache, no-store, must-revalidate";
@@ -187,4 +283,76 @@ public interface IHTTPConstants
     public static final long   YEAR_IN_SECONDS                     = 31536000L;
 
     public static final long   YEAR_IN_MILLISECONDS                = 31536000000L;
+
+    public final static long   NANOSECONDS_IN_MILLISECONDS         = 1000000L;
+
+    public static String doContentDispositionAttahcmentFileNameHeader(final String name)
+    {
+        return ATTACHMENT_FILENAME_PREFIX + name;
+    }
+
+    public static String doContentDispositionInlineFileNameHeader(final String name)
+    {
+        return ATTACHMENT_INLINE_FILENAME_PREFIX + name;
+    }
+
+    public static String doMaxAgeHeaderInSecords(final long seconds)
+    {
+        return CACHE_CONTROL_MAX_AGE_PREFIX + seconds;
+    }
+
+    public static String doMaxAgeHeaderInHours(final long hours)
+    {
+        return doMaxAgeHeaderInSecords(hours * HOUR_IN_SECONDS);
+    }
+
+    public static String doMaxAgeHeaderInDays(final long days)
+    {
+        return doMaxAgeHeaderInSecords(days * DAY_IN_SECONDS);
+    }
+
+    public static String doMaxAgeHeaderInWeeks(final long weeks)
+    {
+        return doMaxAgeHeaderInSecords(weeks * WEEK_IN_SECONDS);
+    }
+
+    public static String doMaxAgeHeaderInYears(final long years)
+    {
+        return doMaxAgeHeaderInSecords(years * YEAR_IN_SECONDS);
+    }
+
+    public static String doStrictTransportSecurityHeaderInSeconds(final long seconds, final boolean subdomains)
+    {
+        return CACHE_CONTROL_MAX_AGE_PREFIX + seconds + ((subdomains) ? "; includeSubDomains" : "");
+    }
+
+    public static String doStrictTransportSecurityHeaderInSeconds(final long seconds)
+    {
+        return doStrictTransportSecurityHeaderInSeconds(seconds, true);
+    }
+
+    public static String doStrictTransportSecurityHeaderInYears(final long years)
+    {
+        return doStrictTransportSecurityHeaderInYears(years, true);
+    }
+
+    public static String doStrictTransportSecurityHeaderInYears(final long years, final boolean subdomains)
+    {
+        return doStrictTransportSecurityHeaderInSeconds(years * YEAR_IN_SECONDS, subdomains);
+    }
+
+    public static String doStrictTransportSecurityHeader()
+    {
+        return doStrictTransportSecurityHeaderInYears(1, true);
+    }
+
+    public static String doStrictTransportSecurityHeader(final boolean subdomains)
+    {
+        return doStrictTransportSecurityHeaderInYears(1, subdomains);
+    }
+
+    public static boolean isHTTPCodeInRange(final int code, final int minc, final int maxc)
+    {
+        return ((code >= minc) && (code <= maxc));
+    }
 }

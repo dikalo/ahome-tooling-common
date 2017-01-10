@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2014,2015,2016 Ahome' Innovation Technologies. All rights reserved.
+   Copyright (c) 2017 Ahome' Innovation Technologies. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -16,9 +16,13 @@
 
 package com.ait.tooling.common.api.java.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.StringTokenizer;
 
 public final class StringOps
 {
@@ -127,6 +131,59 @@ public final class StringOps
         return toPrintableString(toArray(collection));
     }
 
+    public static final String toCommaSeparated(final Collection<String> collection)
+    {
+        Objects.requireNonNull(collection);
+
+        final StringBuilder b = new StringBuilder();
+
+        final Iterator<String> i = collection.iterator();
+
+        while (i.hasNext())
+        {
+            final String v = i.next();
+
+            b.append(v);
+
+            if (i.hasNext())
+            {
+                b.append(SEPR);
+            }
+        }
+        return b.toString();
+    }
+
+    public static final String toCommaSeparated(final String... collection)
+    {
+        return toCommaSeparated(Arrays.asList(collection));
+    }
+
+    public static Collection<String> tokenizeToStringCollection(final String string, final String delimiters, final boolean trim, final boolean ignore)
+    {
+        if (null == string)
+        {
+            return null;
+        }
+        final StringTokenizer st = new StringTokenizer(string, delimiters);
+
+        final ArrayList<String> li = new ArrayList<String>();
+
+        while (st.hasMoreTokens())
+        {
+            String token = st.nextToken();
+
+            if (trim)
+            {
+                token = token.trim();
+            }
+            if ((false == ignore) || (token.length() > 0))
+            {
+                li.add(token);
+            }
+        }
+        return li;
+    }
+
     public static final String toPrintableString(final String... list)
     {
         if (null == list)
@@ -179,7 +236,7 @@ public final class StringOps
         return string;
     }
 
-    public static final String toTrimOrElse(String string, String otherwise)
+    public static final String toTrimOrElse(String string, final String otherwise)
     {
         string = toTrimOrNull(string);
 
